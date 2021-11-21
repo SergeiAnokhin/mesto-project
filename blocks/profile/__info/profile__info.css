@@ -1,0 +1,14 @@
+.profile__info {
+    margin: 0;
+    font-size: 18px;
+    line-height: 22px;
+    padding-top: 7px;
+    justify-self: flex-start;
+}
+
+@media (max-width: 424px) {
+    .profile__info {
+        font-size: 14px;
+        line-height: 17px;
+    }
+}

@@ -1,0 +1,14 @@
+.element {
+    background-color: #fff;
+    display: grid;
+    grid-template-columns: 4fr 1fr;
+    grid-template-rows: minmax(auto, 282px) minmax(auto, 79px);
+    grid-template-areas:
+    "image image"
+    "title like"
+    ;
+    align-items: center;
+    border-radius: 10px;
+    overflow: hidden;
+    box-sizing: border-box;
+}

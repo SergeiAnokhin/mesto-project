@@ -1,0 +1,5 @@
+@media (max-width: 424px) {
+    .edit-button__image {
+        max-width: 100%;
+    }
+}

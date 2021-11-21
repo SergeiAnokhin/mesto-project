@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./pages/index.css">
+</head>
+<body class="body">
+    <div class="page">
+        <header class="header">
+            <img class="header__logo" src="./images/logo.svg" alt="Логотип">
+        </header>
+        <main class="main">
+            <section class="profile">
+                <img class="profile__avatar" src="./images/avatar.jpg" alt="Аватар">
+                <div class="profile__container">
+                    <h1 class="profile__name">Жак-Ив Кусто</h1>
+                    <button type="button" class="edit-button" aria-label="Редактировать профиль"><img class="edit-button__image" src="./images/edit-button.svg" alt="Редактирование профиля"></button>
+                    <p class="profile__info">Исследователь океана</p>
+                </div>
+                <button type="button" class="add-button" aria-label="Добавить"><img class="add-button__image" src="./images/add-button1.svg" alt="Кнопка добавления"></button>
+            </section>
+            <section class="elements" aria-label="Места России">
+                <div class="element">
+                    <img class="element__image" src="./images/elements/element-1.jpg" alt="Картинка места">
+                    <h2 class="element__title">Карачаевск</h2>
+                    <button class="element__like element__like_active" type="button" aria-label="Нравится"></button>
+                </div>
+                <div class="element">
+                    <img class="element__image" src="./images/elements/element-2.jpg" alt="Картинка места">
+                    <h2 class="element__title">Гора Эльбрус</h2>
+                    <button class="element__like" type="button" aria-label="Нравится"></button>
+                </div>
+                <div class="element">
+                    <img class="element__image" src="./images/elements/element-3.jpg" alt="Картинка места">
+                    <h2 class="element__title">Домбай</h2>
+                    <button class="element__like" type="button" aria-label="Нравится"></button>
+                </div>
+                <div class="element">
+                    <img class="element__image" src="./images/elements/element-2.jpg" alt="Картинка места">
+                    <h2 class="element__title">Гора Эльбрус</h2>
+                    <button class="element__like" type="button" aria-label="Нравится"></button>
+                </div>
+                <div class="element">
+                    <img class="element__image" src="./images/elements/element-3.jpg" alt="Картинка места">
+                    <h2 class="element__title">Домбай</h2>
+                    <button class="element__like" type="button" aria-label="Нравится"></button>
+                </div>
+                <div class="element">
+                    <img class="element__image" src="./images/elements/element-1.jpg" alt="Картинка места">
+                    <h2 class="element__title">Карачаево-Черкессия</h2>
+                    <button class="element__like" type="button" aria-label="Нравится"></button>
+                </div>
+            </section>
+            <div class="popup popup_opened">
+                <div class="popup__container">
+                    <h2 class="popup__title">Редактировать профиль</h2>
+                    <input class="popup__name" type="text" value="Жак-Ив Кусто">
+                    <input class="popup__info" type="text" value="Исследователь океана">
+                    <button class="popup__button" type="submit">Сохранить</button>
+                    <button class="popup__close" type="button" aria-label="Закрыть окно"></button>
+                </div>
+            </div>
+        </main>
+        <footer class="footer">
+            &copy; 2020 Mesto Russia
+        </footer>
+    </div>
+</body>
+</html>

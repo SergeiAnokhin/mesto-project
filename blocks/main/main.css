@@ -1,0 +1,19 @@
+.main {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 40px 0 69px;
+}
+
+@media (max-width: 527px) {
+    .main {
+        padding-right: 19px;
+        padding-left: 19px;
+    }
+}
+
+@media (max-width: 424px) {
+    .main {
+        padding-top: 42px;
+        padding-bottom: 50px;
+    }
+}

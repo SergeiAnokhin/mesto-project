@@ -1,0 +1,15 @@
+.page {
+    width: 100%;
+    max-width: 1280px;
+    min-width: 320px;
+    margin: 0 auto;
+    color: #fff;
+    padding: 45px 19px 60px;
+    box-sizing: border-box;
+}
+
+@media (max-width: 527px) {
+    .page {
+        padding: 28px 0 60px;
+    }
+}

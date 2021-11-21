@@ -1,0 +1,12 @@
+.profile__container {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    max-width: 336px;
+}
+
+@media (max-width: 527px) {
+    .profile__container {
+        justify-content: center;
+    }
+}
