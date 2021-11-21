@@ -11,6 +11,8 @@
 - Адаптивная верстка под мобильные устройства;
 - Модели построения сеток Flex и Grid.
 
+[Ссылка на GitHub Pages](https://sergeianokhin.github.io/mesto-project/index.html)
+
 ---
 
 **Студент:** Сергей Анохин
