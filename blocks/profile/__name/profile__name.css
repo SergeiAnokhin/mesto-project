@@ -5,6 +5,10 @@
     margin: 0;
     margin-right: 18px;
     align-self: end;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    max-width: 338px;
 }
 
 @media (max-width: 424px) {
@@ -13,5 +17,6 @@
         line-height: 33px;
         margin-right: 10px;
         margin-left: 27px;
+        max-width: 220px;
     }
 }

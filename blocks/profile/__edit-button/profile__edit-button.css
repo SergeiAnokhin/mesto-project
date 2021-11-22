@@ -1,4 +1,4 @@
-.edit-button {
+.profile__edit-button {
     max-width: 24px;
     max-height: 24px;
     border: 0;
@@ -10,12 +10,12 @@
     transition: all .2s linear;
 }
 
-.edit-button:hover {
+.profile__edit-button:hover {
     opacity: 0.6;
 }
 
 @media (max-width: 424px) {
-    .edit-button {
+    .profile__edit-button {
         max-width: 18px;
         max-height: 18px;
         margin-top: 3px;

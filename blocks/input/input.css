@@ -1,20 +1,17 @@
-.popup__name {
+.input {
     border: none;
     border-bottom: 1px solid rgba(0, 0, 0, .2);
-    margin-top: 48px;
     padding-bottom: 9px;
     font-size: 14px;
     line-height: 17px;
     box-sizing: border-box;
 }
 
-.popup__name:focus {
+.input:focus {
     outline: none;
-    border-bottom: 1px solid rgba(255, 0, 0, .2);
+    margin-bottom: 1px solid rgba(255, 0, 0, .2);
 }
 
-@media (max-width: 527px) {
-    .popup__name {
-        margin-top: 75px;
-    }
+.input:first-of-type {
+    margin-bottom: 30px;
 }

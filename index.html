@@ -17,10 +17,10 @@
                 <img class="profile__avatar" src="./images/avatar.jpg" alt="Аватар">
                 <div class="profile__container">
                     <h1 class="profile__name">Жак-Ив Кусто</h1>
-                    <button type="button" class="edit-button" aria-label="Редактировать профиль"><img class="edit-button__image" src="./images/edit-button.svg" alt="Редактирование профиля"></button>
+                    <button type="button" class="profile__edit-button" aria-label="Редактировать профиль"><img class="profile__edit-image" src="./images/edit-button.svg" alt="Редактирование профиля"></button>
                     <p class="profile__info">Исследователь океана</p>
                 </div>
-                <button type="button" class="add-button" aria-label="Добавить"><img class="add-button__image" src="./images/add-button1.svg" alt="Кнопка добавления"></button>
+                <button type="button" class="profile__add-button" aria-label="Добавить"><img class="profile__add-image" src="./images/add-button1.svg" alt="Кнопка добавления"></button>
             </section>
             <section class="elements" aria-label="Места России">
                 <div class="element">
@@ -54,18 +54,20 @@
                     <button class="element__like" type="button" aria-label="Нравится"></button>
                 </div>
             </section>
-            <div class="popup popup_opened">
+            <div class="popup">
                 <div class="popup__container">
                     <h2 class="popup__title">Редактировать профиль</h2>
-                    <input class="popup__name" type="text" value="Жак-Ив Кусто">
-                    <input class="popup__info" type="text" value="Исследователь океана">
-                    <button class="popup__button" type="submit">Сохранить</button>
+                    <form class="popup__form" name="popup__form">
+                        <input class="input" name="popup__name" type="text" value="Жак-Ив Кусто">
+                        <input class="input" name="popup__info" type="text" value="Исследователь океана">
+                        <button class="popup__button" type="submit">Сохранить</button>
+                    </form>
                     <button class="popup__close" type="button" aria-label="Закрыть окно"></button>
                 </div>
             </div>
         </main>
         <footer class="footer">
-            &copy; 2020 Mesto Russia
+            <p class="footer__text">&copy; 2020 Mesto Russia</p>
         </footer>
     </div>
 </body>
