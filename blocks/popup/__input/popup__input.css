@@ -1,4 +1,4 @@
-.input {
+.popup__input {
     border: none;
     border-bottom: 1px solid rgba(0, 0, 0, .2);
     padding-bottom: 9px;
@@ -8,11 +8,11 @@
     margin-bottom: 30px;
 }
 
-.input:focus {
+.popup__input:focus {
     outline: none;
     border-bottom: 1px solid rgba(255, 0, 0, .2);
 }
 
-.input:last-of-type {
+.popup__input:last-of-type {
     margin-bottom: 0;
 }
