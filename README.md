@@ -10,6 +10,7 @@
 - Методология БЭМ;
 - Адаптивная верстка под мобильные устройства;
 - Модели построения сеток Flex и Grid.
+- JavaScript (Модальные окна, добавление и удаление карточек мест, лайки).
 
 [Ссылка на GitHub Pages](https://sergeianokhin.github.io/mesto-project/index.html)
 

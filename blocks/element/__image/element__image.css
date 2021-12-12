@@ -1,3 +1,11 @@
 .element__image {
     grid-area: image;
+    width: 282px;
+    height: 282px;
+    object-fit: cover;
+    object-position: center center;
+}
+
+.element__image:hover {
+    cursor: pointer;
 }
