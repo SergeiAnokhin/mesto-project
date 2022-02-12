@@ -40,11 +40,11 @@ const addElementBtn = document.querySelector('.profile__add-button');
 const profileName = document.querySelector('.profile__name');
 const profileInfo = document.querySelector('.profile__info');
 
-const profileNamePopup = editPopup.querySelector('[name="popup__profile-name"]');
-const profileInfoPopup = editPopup.querySelector('[name="popup__profile-info"]');
+const profileNamePopup = editPopup.querySelector('[name="profile-name"]');
+const profileInfoPopup = editPopup.querySelector('[name="profile-info"]');
 
-const imgLink = addPopup.querySelector('[name="popup__image-link"]');
-const placeName = addPopup.querySelector('[name="popup__place-name"]');
+const imgLink = addPopup.querySelector('[name="image-link"]');
+const placeName = addPopup.querySelector('[name="place-name"]');
 
 const elements = document.querySelector('.elements');
 const templateElement = document.querySelector('.elements__template').content;
