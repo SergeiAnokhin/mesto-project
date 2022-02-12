@@ -63,11 +63,50 @@ function closePopup(popup){
 }
 
 // Закрытие модального окна через кнопку крестик
-function closePopupBtn(popup) {
+// function closePopupBtn(popup) {
+//   popup.querySelector('.popup__close').addEventListener('click', () => {
+//     closePopup(popup);
+//   });
+// }
+
+// ===========================
+
+function closePopupEvents(popup) {
+  popup.addEventListener('click', (e) => {
+    if (e.target === popup) {
+      closePopup(popup);
+    }
+    else {
+      return
+    }
+  });
   popup.querySelector('.popup__close').addEventListener('click', () => {
     closePopup(popup);
   });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      closePopup(popup)
+    }
+  })
 }
+
+// closePop(addPopup)
+// closePop(editPopup)
+// closePop(imgPopup)
+
+// function closePopupEsc(popup) {
+//   document.addEventListener('keydown', (e) => {
+//     if (e.key === 'Escape') {
+//       closePopup(popup)
+//     }
+//   })
+// }
+
+// closePopupEsc(addPopup)
+// closePopupEsc(editPopup)
+// closePopupEsc(imgPopup)
+
+// ===========================
 
 // Функция создания карточки места
 function createCard(placeName, imgUrl) {
@@ -160,9 +199,9 @@ editProfileBtn.addEventListener('click', editProfilePopup);
 addElementBtn.addEventListener('click', addElementPopup);
 
 // Вызов функций закрытия модального окна через кнопку крестик
-closePopupBtn(editPopup);
-closePopupBtn(addPopup);
-closePopupBtn(imgPopup);
+closePopupEvents(editPopup);
+closePopupEvents(addPopup);
+closePopupEvents(imgPopup);
 
 // Отправка данных из формы редактирования профиля
 submitForm(editPopup, editProfileSubmit);

@@ -35,9 +35,11 @@
             <div class="popup" id="popup_edit-profile">
                 <div class="popup__container">
                     <h2 class="popup__title">Редактировать профиль</h2>
-                    <form class="popup__form" name="popup__form">
-                        <input class="popup__input" name="popup__profile-name" type="text">
-                        <input class="popup__input" name="popup__profile-info" type="text">
+                    <form class="popup__form" name="edit-profile">
+                        <input class="popup__input" name="profile-name" id="profile-name" type="text">
+                        <span class="popup__input-error profile-name-error">1111111111111111</span>
+                        <input class="popup__input" name="profile-info" id="profile-info" type="text">
+                        <span class="popup__input-error profile-info-error">1111111111111111</span>
                         <button class="popup__button" type="submit">Сохранить</button>
                     </form>
                     <button class="popup__close" type="button" aria-label="Закрыть окно"></button>
@@ -46,9 +48,11 @@
             <div class="popup" id="popup_add-element">
                 <div class="popup__container">
                     <h2 class="popup__title">Новое место</h2>
-                    <form class="popup__form" name="popup__form">
-                        <input class="popup__input" name="popup__place-name" type="text" placeholder="Название">
-                        <input class="popup__input" name="popup__image-link" type="text" placeholder="Ссылка на картинку">
+                    <form class="popup__form" name="add-element">
+                        <input class="popup__input" name="place-name" id="place-name" type="text" placeholder="Название">
+                        <span class="popup__input-error place-name-error">1111111111111111</span>
+                        <input class="popup__input" name="image-link" id="image-link" type="text" placeholder="Ссылка на картинку">
+                        <span class="popup__input-error image-link-error">1111111111111111</span>
                         <button class="popup__button" type="submit">Создать</button>
                     </form>
                     <button class="popup__close" type="button" aria-label="Закрыть окно"></button>
