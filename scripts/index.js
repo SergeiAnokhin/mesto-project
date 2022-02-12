@@ -140,7 +140,7 @@ function createCard(placeName, imgUrl) {
 
 // Функция отправки данных из формы
 function submitForm(popup, func) {
-  popup.querySelector('.popup__form').addEventListener('submit', func); 
+  popup.querySelector('.form').addEventListener('submit', func); 
 }
 
 // Добавление карточек при загрузки страницы
