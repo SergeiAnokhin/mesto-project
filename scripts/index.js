@@ -30,6 +30,8 @@ const initialCards = [
 const editPopup = document.querySelector('#popup_edit-profile');
 const addPopup = document.querySelector('#popup_add-element');
 const imgPopup = document.querySelector('#popup_element-image');
+
+const forms = document.forms;
   
 const popupImage = document.querySelector('.popup__image');
 const popupPlaceName = document.querySelector('.popup__place-name');
@@ -186,6 +188,78 @@ function addElementPopup() {
   openPopup(addPopup);
 }
 
+// ВАЛИДАЦИЯ ФОРМ
+
+const showInputError = (formElement, inputElement, errorMessage) => {
+
+  const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
+
+  inputElement.classList.add('form__input_type_error');
+  errorElement.textContent = errorMessage;
+  errorElement.classList.add('form__input-error_active');
+};
+
+const hideInputError = (formElement, inputElement) => {
+
+  const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
+
+  inputElement.classList.remove('form__input_type_error');
+  errorElement.classList.remove('form__input-error_active');
+  errorElement.textContent = '';
+}; 
+
+const hasInvalidInput = (inputList) => {
+  return inputList.some((inputElement) => {
+    return !inputElement.validity.valid;
+  })
+}; 
+
+const toggleButtonState = (inputList, buttonElement) => {
+  if (hasInvalidInput(inputList)) {
+    buttonElement.disabled = true;
+  } else {
+    buttonElement.disabled = false;
+  }
+}; 
+
+const isValid = (formElement, inputElement) => {
+  if (!inputElement.validity.valid) {
+    showInputError(formElement, inputElement, inputElement.validationMessage);
+  } else {
+    hideInputError(formElement, inputElement);
+  }
+}; 
+
+const setEventListeners = (formElement) => {
+  const inputList = Array.from(formElement.querySelectorAll('.form__input'));
+  const buttonElement = formElement.querySelector('.form__button');
+ 
+  toggleButtonState(inputList, buttonElement);
+
+  inputList.forEach((inputElement) => {
+    inputElement.addEventListener('input', () => {
+      isValid(formElement, inputElement)
+      console.log(inputElement.value)
+      toggleButtonState(inputList, buttonElement);
+    });
+  });
+
+}; 
+
+const enableValidation = () => {
+
+  const formList = Array.from(forms);
+
+  formList.forEach((formElement) => {
+    formElement.addEventListener('submit', (evt) => {
+      evt.preventDefault();
+    });
+    setEventListeners(formElement);
+  });
+
+};
+
+enableValidation(); 
 
 // ВЫЗОВЫ ФУНКЦИЙ
 
