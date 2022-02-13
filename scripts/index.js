@@ -57,6 +57,25 @@ const elementLike = document.querySelector('.element__like');
 // Открытие модального окна
 function openPopup(popup) {
   popup.classList.add('popup_opened');
+
+  if (popup.querySelector('form')) {
+    const form = popup.querySelector('form');
+    const inputList = Array.from(popup.querySelectorAll('.form__input'));
+    const buttonElement = popup.querySelector('button')
+
+    inputList.forEach(input => {
+      if (input.value !== '') {
+        isValid(form, input);
+      } else {
+        input.classList.remove('form__input_type_error')
+        popup.querySelector(`.${input.id}-error`).textContent = '';
+      }
+    })
+  
+    hasInvalidInput(inputList);
+    toggleButtonState(inputList, buttonElement);
+  } 
+
 }
 
 // Закрытие модального окна
@@ -239,7 +258,6 @@ const setEventListeners = (formElement) => {
   inputList.forEach((inputElement) => {
     inputElement.addEventListener('input', () => {
       isValid(formElement, inputElement)
-      console.log(inputElement.value)
       toggleButtonState(inputList, buttonElement);
     });
   });
