@@ -30,6 +30,7 @@ const initialCards = [
 const editPopup = document.querySelector('#popup_edit-profile');
 const addPopup = document.querySelector('#popup_add-element');
 const imgPopup = document.querySelector('#popup_element-image');
+const avatarPopup = document.querySelector('#popup_edit-avatar');
 
 const forms = document.forms;
   
@@ -39,9 +40,11 @@ const popupPlaceName = document.querySelector('.popup__place-name');
 const editProfileBtn = document.querySelector('.profile__edit-button');
 const addElementBtn = document.querySelector('.profile__add-button');
 
+const avatarImg = document.querySelector('.profile__avatar-img');
 const profileName = document.querySelector('.profile__name');
 const profileInfo = document.querySelector('.profile__info');
 
+const avatarLinkPopup = avatarPopup.querySelector('[name="avatar-link"]');
 const profileNamePopup = editPopup.querySelector('[name="profile-name"]');
 const profileInfoPopup = editPopup.querySelector('[name="profile-info"]');
 
@@ -190,6 +193,19 @@ function editProfilePopup() {
     openPopup(editPopup);
 }
 
+// Добавление данных из формы редактирования аватара
+function editAvatarSubmit(evt) {
+    evt.preventDefault();
+    avatarImg.src = avatarLinkPopup.value;
+    closePopup(avatarPopup);
+}
+
+// Модальное окно редактирования аватара
+function editAvatarPopup() {
+  
+  openPopup(avatarPopup);
+}
+
 // Добавление данных из формы добавления карточек
 function addElementSubmit(evt) {
   evt.preventDefault();
@@ -294,9 +310,14 @@ addElementBtn.addEventListener('click', addElementPopup);
 closePopupEvents(editPopup);
 closePopupEvents(addPopup);
 closePopupEvents(imgPopup);
+closePopupEvents(avatarPopup);
 
 // Отправка данных из формы редактирования профиля
 submitForm(editPopup, editProfileSubmit);
 
 // Отправка данных из формы добавления карточек
 submitForm(addPopup, addElementSubmit);
+
+
+avatarImg.addEventListener('click', editAvatarPopup)
+submitForm(avatarPopup, editAvatarSubmit)
