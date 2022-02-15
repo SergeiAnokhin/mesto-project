@@ -306,6 +306,9 @@ editProfileBtn.addEventListener('click', editProfilePopup);
 // Вызов модального окна добавления карточек
 addElementBtn.addEventListener('click', addElementPopup);
 
+// Вызов модального окна редактирования аватара
+avatarImg.addEventListener('click', editAvatarPopup)
+
 // Вызов функций закрытия модального окна через кнопку крестик
 closePopupEvents(editPopup);
 closePopupEvents(addPopup);
@@ -318,6 +321,5 @@ submitForm(editPopup, editProfileSubmit);
 // Отправка данных из формы добавления карточек
 submitForm(addPopup, addElementSubmit);
 
-
-avatarImg.addEventListener('click', editAvatarPopup)
+// Отправка данных из формы редактирования аватара
 submitForm(avatarPopup, editAvatarSubmit)
