@@ -1,5 +1,5 @@
 import {validateOpenPopup} from "./validate.js";
-import { closePopupEvents, closePopupEventsRemove } from "./modal.js";
+import { closePopupEvents } from "./modal.js";
 
 
 const initialCards = [

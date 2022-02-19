@@ -104,4 +104,4 @@ function addElementSubmit(evt) {
     };
 }
 
-export {modal, editAvatarPopup, editProfilePopup, addElementPopup, closePopupEvents, closePopupEventsRemove, submitForm, editProfileSubmit, editAvatarSubmit, addElementSubmit}
+export {modal, editAvatarPopup, editProfilePopup, addElementPopup, closePopupEvents, submitForm, editProfileSubmit, editAvatarSubmit, addElementSubmit}
