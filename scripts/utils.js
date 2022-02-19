@@ -1,5 +1,5 @@
 import {validateOpenPopup} from "./validate.js";
-import { closePopupEvents } from "./modal.js";
+import { closePopupEvents, closePopupEventsRemove } from "./modal.js";
 
 
 const initialCards = [
@@ -50,8 +50,9 @@ function openPopup(popup) {
 }
 
   // Закрытие модального окна
-function closePopup(popup){
+function closePopup(popup) {
     popup.classList.remove('popup_opened');
+    closePopupEventsRemove(popup)
 }
 
 export {openPopup, closePopup, initialCards, profile, buttons};

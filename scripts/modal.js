@@ -43,22 +43,20 @@ function addElementPopup() {
 
 function closePopupOverlay(evt) {
     if (evt.target.classList.contains('popup')) {
-        evt.currentTarget.classList.remove('popup_opened');
-        evt.currentTarget.removeEventListener('click', closePopupOverlay);
+        closePopup(evt.currentTarget);
     }
 }
 
 function closePopupBtn(evt) {
     if (evt.target.classList.contains('popup__close')) {
-        evt.currentTarget.classList.remove('popup_opened');
-        evt.currentTarget.removeEventListener('click', closePopupBtn);
+        console.log(evt.currentTarget);
+        closePopup(evt.currentTarget);
     }
 }
 
 function closePopupEscape(evt) {
     if (evt.key === 'Escape' && document.querySelector('.popup_opened')) {
-        document.querySelector('.popup_opened').classList.remove('popup_opened')
-        document.removeEventListener('keydown', closePopupEscape);
+        closePopup(document.querySelector('.popup_opened'));
     }
 }
 
@@ -70,6 +68,12 @@ function closePopupEvents(popup) {
     popup.addEventListener('click', closePopupOverlay);
     popup.addEventListener('click', closePopupBtn);
     document.addEventListener('keydown', closePopupEscape)
+}
+
+function closePopupEventsRemove(popup) {
+    popup.removeEventListener('click', closePopupOverlay);
+    popup.removeEventListener('click', closePopupBtn);
+    document.removeEventListener('keydown', closePopupEscape)
 }
 
 // Функция отправки данных из формы
@@ -104,4 +108,4 @@ function addElementSubmit(evt) {
     };
 }
 
-export {modal, editAvatarPopup, editProfilePopup, addElementPopup, closePopupEvents, submitForm, editProfileSubmit, editAvatarSubmit, addElementSubmit}
+export {modal, editAvatarPopup, editProfilePopup, addElementPopup, closePopupEvents, closePopupEventsRemove, submitForm, editProfileSubmit, editAvatarSubmit, addElementSubmit}
