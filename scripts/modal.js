@@ -72,13 +72,6 @@ function closePopupEvents(popup) {
     document.addEventListener('keydown', closePopupEscape)
 }
 
-function closePopupEventsRemove(popup) {
-    popup.removeEventListener('click', closePopupOverlay);
-    popup.removeEventListener('click', closePopupBtn);
-    document.removeEventListener('keydown', closePopupEscape)
-}
-
-
 // Функция отправки данных из формы
 function submitForm(popup, func) {
     popup.querySelector('.form').addEventListener('submit', func); 
