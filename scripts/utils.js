@@ -44,7 +44,6 @@ const initialCards = [
 // Открытие модального окна
 function openPopup(popup) {
     popup.classList.add('popup_opened');
-    // Вызов функций закрытия модального окна через кнопку крестик
     closePopupEvents(popup);
     validateOpenPopup(popup);
 }

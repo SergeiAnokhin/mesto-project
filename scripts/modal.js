@@ -39,14 +39,14 @@ function addElementPopup() {
     openPopup(modal.addPopup);
 }
 
-// ===============================
-
+// Функция-обработчик закрытия попапа при клике по оверлею
 function closePopupOverlay(evt) {
     if (evt.target.classList.contains('popup')) {
         closePopup(evt.currentTarget);
     }
 }
 
+// Функция-обработчик закрытия попапа при клике по кнопке крестик
 function closePopupBtn(evt) {
     if (evt.target.classList.contains('popup__close')) {
         console.log(evt.currentTarget);
@@ -54,22 +54,21 @@ function closePopupBtn(evt) {
     }
 }
 
+// Функция-обработчик закрытия попапа при нажатии клавиши Escape
 function closePopupEscape(evt) {
     if (evt.key === 'Escape' && document.querySelector('.popup_opened')) {
         closePopup(document.querySelector('.popup_opened'));
     }
 }
 
-// ===============================
-
-
-  // Функция обработчиков событий закрытия модального окна
+  // Функция добавления обработчиков событий закрытия модального окна
 function closePopupEvents(popup) {
     popup.addEventListener('click', closePopupOverlay);
     popup.addEventListener('click', closePopupBtn);
     document.addEventListener('keydown', closePopupEscape)
 }
 
+ // Функция снятия обработчиков событий закрытия модального окна
 function closePopupEventsRemove(popup) {
     popup.removeEventListener('click', closePopupOverlay);
     popup.removeEventListener('click', closePopupBtn);
