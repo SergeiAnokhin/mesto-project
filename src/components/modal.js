@@ -1,6 +1,6 @@
-import { openPopup, closePopup } from "./utils.js";
+import { openPopup, closePopup, profile } from "./utils.js";
 import { createCard, elements } from "./card.js";
-import { profile } from "./utils.js";
+import { validateOpenPopup } from "./validate.js"
 
 const modal = {
     editPopup : document.querySelector('#popup_edit-profile'),
@@ -25,11 +25,14 @@ function editProfilePopup() {
     modal.profileNamePopup.value = profile.profileName.textContent;
     modal.profileInfoPopup.value = profile.profileInfo.textContent;
     openPopup(modal.editPopup);
+    validateOpenPopup(modal.editPopup);
 }
 
 // Модальное окно редактирования аватара
 function editAvatarPopup() {
+    modal.avatarLinkPopup.value = '';
     openPopup(modal.avatarPopup);
+    validateOpenPopup(modal.avatarPopup);
 }
 
 // Модальное окно добавления карточек
@@ -37,6 +40,7 @@ function addElementPopup() {
     modal.imgLink.value = '';
     modal.placeName.value = '';
     openPopup(modal.addPopup);
+    validateOpenPopup(modal.addPopup);
 }
 
 // Функция-обработчик закрытия попапа при клике по оверлею
@@ -49,7 +53,6 @@ function closePopupOverlay(evt) {
 // Функция-обработчик закрытия попапа при клике по кнопке крестик
 function closePopupBtn(evt) {
     if (evt.target.classList.contains('popup__close')) {
-        console.log(evt.currentTarget);
         closePopup(evt.currentTarget);
     }
 }
