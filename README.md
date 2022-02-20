@@ -11,6 +11,8 @@
 - Адаптивная верстка под мобильные устройства;
 - Модели построения сеток Flex и Grid.
 - JavaScript (Модальные окна, добавление и удаление карточек мест, лайки).
+- Модули JavaScript.
+- Сборка проекта Webpack
 
 [Ссылка на GitHub Pages](https://sergeianokhin.github.io/mesto-project/index.html)
 
