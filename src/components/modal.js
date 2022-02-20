@@ -1,6 +1,6 @@
 import { openPopup, closePopup, profile } from "./utils.js";
 import { createCard, elements } from "./card.js";
-import { validateOpenPopup } from "./validate.js"
+import {hasInvalidInput, toggleButtonState} from './validate.js'
 
 const modal = {
     editPopup : document.querySelector('#popup_edit-profile'),
@@ -20,19 +20,38 @@ const modal = {
     placeName : document.querySelector('[name="place-name"]')
 }
 
+function clearErrors(popup) {
+    const inputList = Array.from(popup.querySelectorAll('.form__input'));
+    const errorList = Array.from(popup.querySelectorAll('.form__input-error'));
+    const buttonElement = popup.querySelector('.form__button');
+
+    inputList.forEach(input => {
+        if (input.classList.contains('form__input_type_error')) {
+            input.classList.remove('form__input_type_error');
+        }
+    })
+    errorList.forEach(input => {
+        if (input.classList.contains('form__input-error_active')) {
+            input.classList.remove('form__input-error_active');
+        }
+    })
+    hasInvalidInput(inputList);
+    toggleButtonState(inputList, buttonElement);
+}
+
 // Модальное окно редактирования профиля
 function editProfilePopup() {
     modal.profileNamePopup.value = profile.profileName.textContent;
     modal.profileInfoPopup.value = profile.profileInfo.textContent;
     openPopup(modal.editPopup);
-    validateOpenPopup(modal.editPopup);
+    clearErrors(modal.editPopup);
 }
 
 // Модальное окно редактирования аватара
 function editAvatarPopup() {
     modal.avatarLinkPopup.value = '';
     openPopup(modal.avatarPopup);
-    validateOpenPopup(modal.avatarPopup);
+    clearErrors(modal.avatarPopup);
 }
 
 // Модальное окно добавления карточек
@@ -40,7 +59,7 @@ function addElementPopup() {
     modal.imgLink.value = '';
     modal.placeName.value = '';
     openPopup(modal.addPopup);
-    validateOpenPopup(modal.addPopup);
+    clearErrors(modal.addPopup);
 }
 
 // Функция-обработчик закрытия попапа при клике по оверлею

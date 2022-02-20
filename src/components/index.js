@@ -8,7 +8,13 @@ import { initialCards, profile, buttons } from "./utils.js";
 // ВЫЗОВЫ ФУНКЦИЙ
 
 // Вызов функции валидации форм
-enableValidation();
+enableValidation({
+    formSelector: '.form',
+    inputSelector: '.form__input',
+    submitButtonSelector: '.form__button',
+    inputErrorClass: 'form__input_type_error',
+    errorClass: 'form__input-error_active'
+  });
 
 // Вызов функции формирования карточек при загрузке страницы
 addElements(initialCards);
