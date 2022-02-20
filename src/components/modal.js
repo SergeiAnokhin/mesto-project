@@ -1,6 +1,5 @@
 import { openPopup, closePopup, profile } from "./utils.js";
 import { createCard, elements } from "./card.js";
-import { validateOpenPopup } from "./validate.js"
 
 const modal = {
     editPopup : document.querySelector('#popup_edit-profile'),
@@ -25,14 +24,12 @@ function editProfilePopup() {
     modal.profileNamePopup.value = profile.profileName.textContent;
     modal.profileInfoPopup.value = profile.profileInfo.textContent;
     openPopup(modal.editPopup);
-    validateOpenPopup(modal.editPopup);
 }
 
 // Модальное окно редактирования аватара
 function editAvatarPopup() {
     modal.avatarLinkPopup.value = '';
     openPopup(modal.avatarPopup);
-    validateOpenPopup(modal.avatarPopup);
 }
 
 // Модальное окно добавления карточек
