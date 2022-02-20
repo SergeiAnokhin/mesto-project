@@ -5,24 +5,23 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Проект "Место"</title>
-    <link rel="stylesheet" href="./pages/index.css">
 </head>
 <body class="body">
     <div class="page">
         <header class="header">
-            <img class="header__logo" src="./images/logo.svg" alt="Логотип">
+            <img class="header__logo" src="<%=require('./images/logo.svg')%>" alt="Логотип">
         </header>
         <main class="main">
             <section class="profile">
                 <div class="profile__avatar">
-                    <img class="profile__avatar-img" src="./images/avatar.jpg" alt="Аватар">
+                    <img class="profile__avatar-img" src="<%=require('./images/avatar.jpg')%>" alt="Аватар">
                 </div>
                 <div class="profile__container">
                     <h1 class="profile__name">Жак-Ив Кусто</h1>
-                    <button type="button" class="profile__edit-button" aria-label="Редактировать профиль"><img class="profile__edit-image" src="./images/edit-button.svg" alt="Редактирование профиля"></button>
+                    <button type="button" class="profile__edit-button" aria-label="Редактировать профиль"><img class="profile__edit-image" src="<%=require('./images/edit-button.svg')%>" alt="Редактирование профиля"></button>
                     <p class="profile__info">Исследователь океана</p>
                 </div>
-                <button type="button" class="profile__add-button" aria-label="Добавить"><img class="profile__add-image" src="./images/add-button1.svg" alt="Кнопка добавления"></button>
+                <button type="button" class="profile__add-button" aria-label="Добавить"><img class="profile__add-image" src="<%=require('./images/add-button1.svg')%>" alt="Кнопка добавления"></button>
             </section>
             <section class="elements" aria-label="Места России">
             </section>
@@ -62,8 +61,8 @@
             </div>
             <div class="popup popup_img" id="popup_element-image">
                 <div class="popup__container popup__container_img">
-                    <img class="popup__image" src="https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg" alt="Архыз">
-                    <p class="popup__place-name">Архыз</p>
+                    <img class="popup__image" src="#" alt="#">
+                    <p class="popup__place-name"></p>
                     <button class="popup__close" type="button" aria-label="Закрыть окно"></button>
                 </div>
             </div>

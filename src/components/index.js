@@ -1,3 +1,4 @@
+import '../pages/index.css';
 import {enableValidation} from "./validate.js";
 import { modal, addElementPopup, editAvatarPopup, editProfilePopup, submitForm, editProfileSubmit, editAvatarSubmit, addElementSubmit } from "./modal.js";
 import { addElements } from "./card.js";
