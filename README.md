@@ -14,10 +14,8 @@
 - Модули JavaScript.
 - Сборка проекта Webpack
 
-[Ссылка на GitHub Pages](https://sergeianokhin.github.io/mesto-project/index.html)
-
 ---
 
 **Студент:** Сергей Анохин
 
-![Логотип Яндекса](./images/yandex-logo.svg)
+![Логотип Яндекса](./src/images/yandex-logo.svg)
