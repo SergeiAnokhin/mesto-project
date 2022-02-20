@@ -20,4 +20,4 @@
 
 **Студент:** Сергей Анохин
 
-![Логотип Яндекса](./images/yandex-logo.svg)
+![Логотип Яндекса](./src/images/yandex-logo.svg)
