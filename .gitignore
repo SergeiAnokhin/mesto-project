@@ -1,7 +1,7 @@
-node_modules/ 
-/dist 
-.idea/ 
-.vscode/ 
+node_modules
+dist 
+.idea
+.vscode
 *.sw*
 .DStore
 .editorconfig
