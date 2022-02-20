@@ -2,10 +2,10 @@ import {modal} from './modal.js'
 import { openPopup } from './utils.js';
 
 const elements = document.querySelector('.elements');
+const templateElement = document.querySelector('.elements__template').content;
 
 // Функция создания карточки места
 function createCard(placeName, imgUrl) {
-    const templateElement = document.querySelector('.elements__template').content;
     const card = templateElement.querySelector('.element').cloneNode(true);
     card.querySelector('.element__image').src = imgUrl;
     card.querySelector('.element__image').alt = placeName;
