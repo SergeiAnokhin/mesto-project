@@ -39,26 +39,6 @@ const showInputError = (formElement, inputElement, errorMessage, {inputErrorClas
       hideInputError(formElement, inputElement, rest);
     }
   }; 
-
-//   const validateOpenPopup = (popup) => {
-//     if (popup.querySelector('form')) {
-//         const form = popup.querySelector('form');
-//         const inputList = Array.from(popup.querySelectorAll('.form__input'));
-//         const buttonElement = popup.querySelector('button')
-    
-//         inputList.forEach(input => {
-//             if (input.value !== '') {
-//                 isValid(form, input);
-//             } else {
-//                 input.classList.remove('form__input_type_error')
-//                 popup.querySelector(`.${input.id}-error`).textContent = '';
-//             }
-//         })
-        
-//         hasInvalidInput(inputList);
-//         toggleButtonState(inputList, buttonElement);
-//         }
-// }
   
   const setEventListeners = (formElement, {inputSelector, submitButtonSelector, ...rest}) => {
     const inputList = Array.from(formElement.querySelectorAll(inputSelector));
