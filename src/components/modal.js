@@ -1,7 +1,7 @@
 import { openPopup, closePopup, profile } from "./utils.js";
 import { createCard, elements } from "./card.js";
 import { hasInvalidInput, toggleButtonState } from './validate.js';
-import { config, addCard } from "./api.js";
+import { config, addCard, editProfile, editAvatar } from "./api.js";
 
 const modal = {
     editPopup : document.querySelector('#popup_edit-profile'),
@@ -110,6 +110,7 @@ function editProfileSubmit(evt) {
     if (modal.profileNamePopup.value !== '' && modal.profileInfoPopup.value !== '') {
         profile.profileName.textContent = modal.profileNamePopup.value;
         profile.profileInfo.textContent = modal.profileInfoPopup.value;
+        editProfile(modal.profileNamePopup.value, modal.profileInfoPopup.value)
         closePopup(modal.editPopup);
     };
 }
@@ -118,6 +119,7 @@ function editProfileSubmit(evt) {
 function editAvatarSubmit(evt) {
     evt.preventDefault();
     profile.avatarImg.src = modal.avatarLinkPopup.value;
+    editAvatar(modal.avatarLinkPopup.value);
     closePopup(modal.avatarPopup);
 }
 
