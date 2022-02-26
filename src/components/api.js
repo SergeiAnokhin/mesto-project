@@ -22,8 +22,6 @@ export const getInitialCards = () => {
       return Promise.reject(`Ошибка: ${res.status}`);
     })
     .then((result) => {
-      // console.log(result)
-      console.log(result.filter(item => {return item.owner._id === "ada2e669f5fc694dcb3dd0c1"}))
         addElements(result)
       })
       .catch((err) => {
@@ -73,23 +71,23 @@ export const addCard = (name, link) => {
       }); 
 }
 
-// export const deleteCard = () => {
-//   return fetch(`${config.baseUrl}/cards/`, {
-//     method: 'DELETE',
-//     headers: config.headers,
-//   })
-//     .then(res => {
-//       if (res.ok) {
-//         return res.json();
-//       }
-//       return Promise.reject(`Ошибка: ${res.status}`);
-//     })
-//     .then((result) => {
-//         addElement(result)
-//       })
-//       .catch((err) => {
-//         console.log(err); // выводим ошибку в консоль
-//       }); 
-// } 
+export const deleteCard = (cardId) => {
+  return fetch(`${config.baseUrl}/cards/${cardId}`, {
+    method: 'DELETE',
+    headers: config.headers,
+  })
+    .then(res => {
+      if (res.ok) {
+        return res.json();
+      }
+      return Promise.reject(`Ошибка: ${res.status}`);
+    })
+    .then((result) => {
+        console.log(result)
+      })
+      .catch((err) => {
+        console.log(err); // выводим ошибку в консоль
+      }); 
+} 
 
 export { config, userId }

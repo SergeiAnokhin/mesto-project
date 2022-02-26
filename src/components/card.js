@@ -1,4 +1,4 @@
-import { userId } from './api.js';
+import { deleteCard, userId } from './api.js';
 import { modal } from './modal.js'
 import { openPopup } from './utils.js';
 
@@ -17,6 +17,7 @@ function createCard(cardObj) {
     }
   
     card.querySelector('.element__trash').addEventListener('click', () => {
+      deleteCard(cardObj._id)
       card.remove();
     });
   
@@ -50,5 +51,7 @@ function createCard(cardObj) {
       const cardElement = createCard(cardObj);
       elements.prepend(cardElement);
   }
+
+  
 
   export { createCard, addElements, elements, addElement }
