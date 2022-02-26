@@ -1,3 +1,4 @@
+import { userId } from './api.js';
 import { modal } from './modal.js'
 import { openPopup } from './utils.js';
 
@@ -5,14 +6,17 @@ const elements = document.querySelector('.elements');
 const templateElement = document.querySelector('.elements__template').content;
 
 // Функция создания карточки места
-function createCard(placeName, imgUrl) {
+function createCard(cardObj) {
     const card = templateElement.querySelector('.element').cloneNode(true);
-    card.querySelector('.element__image').src = imgUrl;
-    card.querySelector('.element__image').alt = placeName;
-    card.querySelector('.element__title').textContent = placeName;
+    card.querySelector('.element__image').src = cardObj.link;
+    card.querySelector('.element__image').alt = cardObj.name;
+    card.querySelector('.element__title').textContent = cardObj.name;
+
+    if (cardObj.owner._id !== userId) {
+      card.querySelector('.element__trash').style.display = 'none';
+    }
   
     card.querySelector('.element__trash').addEventListener('click', () => {
-      openPopup(modal.deletePopup);
       card.remove();
     });
   
@@ -36,14 +40,14 @@ function createCard(placeName, imgUrl) {
   }
 
   function addElements(arrCards) {
-    arrCards.forEach((item) => {
-      const cardElement = createCard(item.name, item.link);
+    arrCards.forEach((cardObj) => {
+      const cardElement = createCard(cardObj);
       elements.append(cardElement);
     });
   }
 
-  function addElement(card) {
-      const cardElement = createCard(card.name, card.link);
+  function addElement(cardObj) {
+      const cardElement = createCard(cardObj);
       elements.prepend(cardElement);
   }
 
