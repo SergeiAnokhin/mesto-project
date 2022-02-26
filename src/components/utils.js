@@ -30,4 +30,4 @@ function addProfile(profileInfo) {
   profile.profileInfo.textContent = profileInfo.about;
 }
 
-export {openPopup, closePopup, profile, buttons, addProfile};
+export { openPopup, closePopup, profile, buttons, addProfile };

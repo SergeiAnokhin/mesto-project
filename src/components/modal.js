@@ -1,10 +1,12 @@
 import { openPopup, closePopup, profile } from "./utils.js";
 import { createCard, elements } from "./card.js";
-import {hasInvalidInput, toggleButtonState} from './validate.js'
+import { hasInvalidInput, toggleButtonState } from './validate.js';
+import { config, addCard } from "./api.js";
 
 const modal = {
     editPopup : document.querySelector('#popup_edit-profile'),
     addPopup : document.querySelector('#popup_add-element'),
+    deletePopup : document.querySelector('#popup_delete-element'),
     avatarPopup : document.querySelector('#popup_edit-avatar'),
     imgPopup : document.querySelector('#popup_element-image'),
 
@@ -123,10 +125,9 @@ function editAvatarSubmit(evt) {
 function addElementSubmit(evt) {
     evt.preventDefault();
     if (modal.imgLink.value !== '' && modal.placeName.value !== '') {
-        const cardElement = createCard(modal.placeName.value, modal.imgLink.value);
-        elements.prepend(cardElement);
+        addCard(modal.placeName.value, modal.imgLink.value);
         closePopup(modal.addPopup);
     };
 }
 
-export {modal, editAvatarPopup, editProfilePopup, addElementPopup, closePopupEvents, closePopupEventsRemove, submitForm, editProfileSubmit, editAvatarSubmit, addElementSubmit}
+export { modal, editAvatarPopup, editProfilePopup, addElementPopup, closePopupEvents, closePopupEventsRemove, submitForm, editProfileSubmit, editAvatarSubmit, addElementSubmit }

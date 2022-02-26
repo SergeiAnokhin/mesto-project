@@ -67,4 +67,4 @@ const showInputError = (formElement, inputElement, errorMessage, {inputErrorClas
   
   };
 
-  export {enableValidation, setEventListeners, isValid, toggleButtonState, hasInvalidInput, hideInputError, showInputError}
+  export { enableValidation, setEventListeners, isValid, toggleButtonState, hasInvalidInput, hideInputError, showInputError }

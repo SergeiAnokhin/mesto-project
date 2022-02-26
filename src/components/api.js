@@ -1,4 +1,5 @@
-import { addElements } from "./card";
+import { addElements, addElement } from "./card";
+import { modal } from "./modal";
 import { addProfile } from "./utils";
 
 const config = {
@@ -43,6 +44,29 @@ export const getProfile = () => {
       .catch((err) => {
         console.log(err); // выводим ошибку в консоль
       }); 
+}
+
+export const addCard = (name, link) => {
+  return fetch(`${config.baseUrl}/cards`, {
+    method: 'POST',
+    headers: config.headers,
+    body: JSON.stringify({
+      name: name,
+      link: link
+    })
+  })
+    .then(res => {
+      if (res.ok) {
+        return res.json();
+      }
+      return Promise.reject(`Ошибка: ${res.status}`);
+    })
+    .then((result) => {
+        addElement(result)
+      })
+      .catch((err) => {
+        console.log(err); // выводим ошибку в консоль
+      }); 
 } 
 
-export {config}
+export { config }

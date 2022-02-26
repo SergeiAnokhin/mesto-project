@@ -1,4 +1,4 @@
-import {modal} from './modal.js'
+import { modal } from './modal.js'
 import { openPopup } from './utils.js';
 
 const elements = document.querySelector('.elements');
@@ -12,6 +12,7 @@ function createCard(placeName, imgUrl) {
     card.querySelector('.element__title').textContent = placeName;
   
     card.querySelector('.element__trash').addEventListener('click', () => {
+      openPopup(modal.deletePopup);
       card.remove();
     });
   
@@ -37,9 +38,13 @@ function createCard(placeName, imgUrl) {
   function addElements(arrCards) {
     arrCards.forEach((item) => {
       const cardElement = createCard(item.name, item.link);
-      elements.prepend(cardElement);
+      elements.append(cardElement);
     });
-    
-}
+  }
 
-  export {createCard, addElements, elements}
+  function addElement(card) {
+      const cardElement = createCard(card.name, card.link);
+      elements.prepend(cardElement);
+  }
+
+  export { createCard, addElements, elements, addElement }
