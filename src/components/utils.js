@@ -1,33 +1,5 @@
 import { closePopupEvents, closePopupEventsRemove } from "./modal.js";
 
-
-const initialCards = [
-    {
-      name: 'Архыз',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-    },
-    {
-      name: 'Челябинская область',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-    },
-    {
-      name: 'Иваново',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-    },
-    {
-      name: 'Камчатка',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-    },
-    {
-      name: 'Холмогорский район',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-    },
-    {
-      name: 'Байкал',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-    }
-  ]; 
-
   const profile = {
     profileName : document.querySelector('.profile__name'),
     profileInfo : document.querySelector('.profile__info'),
@@ -52,4 +24,10 @@ function closePopup(popup) {
     closePopupEventsRemove(popup)
 }
 
-export {openPopup, closePopup, initialCards, profile, buttons};
+function addProfile(profileInfo) {
+  profile.avatarImg.src = profileInfo.avatar;
+  profile.profileName.textContent = profileInfo.name;
+  profile.profileInfo.textContent = profileInfo.about;
+}
+
+export {openPopup, closePopup, profile, buttons, addProfile};
