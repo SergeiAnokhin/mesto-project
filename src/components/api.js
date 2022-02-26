@@ -6,10 +6,9 @@ const config = {
   headers: {
     authorization: 'a34ef1b9-3d1d-4a73-a9bd-379580b0d476',
     'Content-Type': 'application/json'
-  }
+  },
+  userId : ''
 }
-
-let userId = '';
 
 export const getInitialCards = () => {
   return fetch(`${config.baseUrl}/cards`, {
@@ -40,7 +39,7 @@ export const getProfile = () => {
       return Promise.reject(`Ошибка: ${res.status}`);
     })
     .then((result) => {
-        userId = result._id
+        config.userId = result._id
         addProfile(result)
       })
       .catch((err) => {
@@ -109,6 +108,7 @@ export const addCard = (name, link) => {
       return Promise.reject(`Ошибка: ${res.status}`);
     })
     .then((result) => {
+      console.log(result)
         addElement(result)
       })
       .catch((err) => {
@@ -135,4 +135,4 @@ export const deleteCard = (cardId) => {
       }); 
 } 
 
-export { config, userId }
+export { config }

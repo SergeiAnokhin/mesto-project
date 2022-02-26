@@ -1,4 +1,4 @@
-import { deleteCard, userId } from './api.js';
+import { config, deleteCard } from './api.js';
 import { modal } from './modal.js'
 import { openPopup } from './utils.js';
 
@@ -12,7 +12,7 @@ function createCard(cardObj) {
     card.querySelector('.element__image').alt = cardObj.name;
     card.querySelector('.element__title').textContent = cardObj.name;
 
-    if (cardObj.owner._id !== userId) {
+    if (cardObj.owner._id !== config.userId) {
       card.querySelector('.element__trash').style.display = 'none';
     }
   
