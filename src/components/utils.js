@@ -50,6 +50,7 @@ export function renderSave(popup, buttonText, isSave) {
     if (isSave) {
       button.textContent = buttonText.doing
     } else {
-      button.textContent = buttonText.do
+        button.textContent = buttonText.do
+        closePopup(popup)
     }
 }

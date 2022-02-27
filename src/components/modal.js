@@ -111,7 +111,6 @@ export function editProfileSubmit(evt) {
         profile.profileName.textContent = modal.profileNamePopup.value;
         profile.profileInfo.textContent = modal.profileInfoPopup.value;
         editProfile(modal.editPopup, modal.profileNamePopup.value, modal.profileInfoPopup.value)
-        closePopup(modal.editPopup);
     };
 }
 
@@ -120,7 +119,6 @@ export function editAvatarSubmit(evt) {
     evt.preventDefault();
     profile.avatarImg.src = modal.avatarLinkPopup.value;
     editAvatar(modal.avatarPopup, modal.avatarLinkPopup.value);
-    closePopup(modal.avatarPopup);
 }
 
   // Добавление данных из формы добавления карточек
@@ -128,6 +126,5 @@ export function addElementSubmit(evt) {
     evt.preventDefault();
     if (modal.imgLink.value !== '' && modal.placeName.value !== '') {
         addCard(modal.addPopup, modal.placeName.value, modal.imgLink.value);
-        closePopup(modal.addPopup);
     };
 }
