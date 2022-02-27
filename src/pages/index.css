@@ -7,6 +7,7 @@
 
 /* Page */
 @import url(../blocks/page/page.css);
+@import url(../blocks/page/_visible/page_visible.css);
 
 /* Header */
 @import url(../blocks/header/header.css);
@@ -36,7 +37,9 @@
 @import url(../blocks/element/__image/element__image.css);
 @import url(../blocks/element/__trash/element__trash.css);
 @import url(../blocks/element/__like/element__like.css);
-@import url(../blocks/element/__like/_active/element__like_active.css);
+@import url(../blocks/element/__like-button/element__like-button.css);
+@import url(../blocks/element/__like-button/_active/element__like-button_active.css);
+@import url(../blocks/element/__like-count/element__like-count.css);
 
 /* Footer */
 @import url(../blocks/footer/footer.css);

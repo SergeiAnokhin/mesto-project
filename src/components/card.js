@@ -1,26 +1,46 @@
-import {modal} from './modal.js'
-import { openPopup } from './utils.js';
+import { addLike, config, deleteCard, deleteLike } from './api.js';
+import { modal, deleteElementSubmit, deleteElementEnter, deleteElementBtn } from './modal.js'
+import { openPopup, closePopup } from './utils.js';
 
-const elements = document.querySelector('.elements');
-const templateElement = document.querySelector('.elements__template').content;
+export const elements = document.querySelector('.elements');
+export const templateElement = document.querySelector('.elements__template').content;
 
 // Функция создания карточки места
-function createCard(placeName, imgUrl) {
+export function createCard(cardObj) {
+    const cardId = cardObj._id;
     const card = templateElement.querySelector('.element').cloneNode(true);
-    card.querySelector('.element__image').src = imgUrl;
-    card.querySelector('.element__image').alt = placeName;
-    card.querySelector('.element__title').textContent = placeName;
+    card.querySelector('.element__image').src = cardObj.link;
+    card.querySelector('.element__image').alt = cardObj.name;
+    card.querySelector('.element__title').textContent = cardObj.name;
+
+    if (cardObj.owner._id !== config.userId) {
+      card.querySelector('.element__trash').style.display = 'none';
+    }
   
     card.querySelector('.element__trash').addEventListener('click', () => {
+      deleteCard(cardId);
       card.remove();
-    });
+      });
   
-    const elementLike = card.querySelector('.element__like');
+    const elementLike = card.querySelector('.element__like-button');
+    const elementLikeCount = card.querySelector('.element__like-count');
+    elementLikeCount.textContent = cardObj.likes.length;
+
+    cardObj.likes.forEach(item => {
+      if (item._id === config.userId) {
+        elementLike.classList.add('element__like-button_active');
+      }
+    })
+
       elementLike.addEventListener('click', () => {
-        if (elementLike.classList.contains('element__like_active')) {
-          elementLike.classList.remove('element__like_active');
+        if (elementLike.classList.contains('element__like-button_active')) {
+          elementLike.classList.remove('element__like-button_active');
+          elementLikeCount.textContent = +elementLikeCount.textContent - 1
+          deleteLike(cardId)
         } else {
-          elementLike.classList.add('element__like_active');
+          elementLike.classList.add('element__like-button_active');
+          elementLikeCount.textContent = +elementLikeCount.textContent + 1
+          addLike(cardId);
         }
     });
   
@@ -34,12 +54,14 @@ function createCard(placeName, imgUrl) {
     return card;
   }
 
-  function addElements(arrCards) {
-    arrCards.forEach((item) => {
-      const cardElement = createCard(item.name, item.link);
-      elements.prepend(cardElement);
+export function addElements(arrCards) {
+    arrCards.forEach((cardObj) => {
+      const cardElement = createCard(cardObj);
+      elements.append(cardElement);
     });
-    
 }
 
-  export {createCard, addElements, elements}
+export function addElement(cardObj) {
+      const cardElement = createCard(cardObj);
+      elements.prepend(cardElement);
+}

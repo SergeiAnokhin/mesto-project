@@ -6,6 +6,9 @@
     color: #fff;
     padding: 45px 19px 55px;
     box-sizing: border-box;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility .1s, opacity .1s linear;
 }
 
 @media (max-width: 527px) {
