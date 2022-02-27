@@ -46,7 +46,6 @@ export function renderLoading() {
 }
 
 export function renderSave(popup, buttonText, isSave) {
-    const popupId = popup.id;
     const button = popup.querySelector('.form__button');
     if (isSave) {
       button.textContent = buttonText.doing

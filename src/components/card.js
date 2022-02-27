@@ -62,7 +62,6 @@ export function addElements(arrCards) {
 }
 
 export function addElement(cardObj) {
-      console.log(cardObj._id)
       const cardElement = createCard(cardObj);
       elements.prepend(cardElement);
 }

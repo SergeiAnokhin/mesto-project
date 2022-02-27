@@ -89,10 +89,10 @@ export const editAvatar = (popup, avatarLink) => {
     .then((result) => {
         console.log(result)
       })
-      .catch((err) => {
+    .catch((err) => {
         console.log(err); // выводим ошибку в консоль
       })
-      .finally(() => renderSave(popup, buttonTextSave, false))
+    .finally(() => renderSave(popup, buttonTextSave, false))
 }
 
 export const addCard = (popup, name, link) => {
@@ -115,10 +115,10 @@ export const addCard = (popup, name, link) => {
       console.log(result)
         addElement(result)
       })
-      .catch((err) => {
+    .catch((err) => {
         console.log(err); // выводим ошибку в консоль
       })
-      .finally(() => renderSave(popup, buttonTextCreate, false))
+    .finally(() => renderSave(popup, buttonTextCreate, false))
 }
 
 export const deleteCard = (cardId) => {
