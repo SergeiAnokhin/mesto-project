@@ -1,4 +1,4 @@
-import { openPopup, closePopup, profile } from "./utils.js";
+import { openPopup, closePopup, profile, renderSave } from "./utils.js";
 import { createCard, elements } from "./card.js";
 import { hasInvalidInput, toggleButtonState } from './validate.js';
 import { config, addCard, editProfile, editAvatar } from "./api.js";
@@ -110,7 +110,7 @@ export function editProfileSubmit(evt) {
     if (modal.profileNamePopup.value !== '' && modal.profileInfoPopup.value !== '') {
         profile.profileName.textContent = modal.profileNamePopup.value;
         profile.profileInfo.textContent = modal.profileInfoPopup.value;
-        editProfile(modal.profileNamePopup.value, modal.profileInfoPopup.value)
+        editProfile(modal.editPopup, modal.profileNamePopup.value, modal.profileInfoPopup.value)
         closePopup(modal.editPopup);
     };
 }
@@ -119,7 +119,7 @@ export function editProfileSubmit(evt) {
 export function editAvatarSubmit(evt) {
     evt.preventDefault();
     profile.avatarImg.src = modal.avatarLinkPopup.value;
-    editAvatar(modal.avatarLinkPopup.value);
+    editAvatar(modal.avatarPopup, modal.avatarLinkPopup.value);
     closePopup(modal.avatarPopup);
 }
 
@@ -127,7 +127,7 @@ export function editAvatarSubmit(evt) {
 export function addElementSubmit(evt) {
     evt.preventDefault();
     if (modal.imgLink.value !== '' && modal.placeName.value !== '') {
-        addCard(modal.placeName.value, modal.imgLink.value);
+        addCard(modal.addPopup, modal.placeName.value, modal.imgLink.value);
         closePopup(modal.addPopup);
     };
 }

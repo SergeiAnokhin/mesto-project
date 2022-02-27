@@ -1,5 +1,5 @@
 import { addElements, addElement } from "./card";
-import { addProfile, renderLoading } from "./utils";
+import { addProfile, renderLoading, renderSave, buttonTextSave, buttonTextCreate } from "./utils";
 
 export const config = {
   baseUrl: 'https://nomoreparties.co/v1/plus-cohort7',
@@ -46,7 +46,7 @@ export const getAll = () => {
   .finally(() => renderLoading());
 } 
 
-export const editProfile = (name, about) => {
+export const editProfile = (popup, name, about) => {
   return fetch(`${config.baseUrl}/users/me`, {
     method: 'PATCH',
     headers: config.headers,
@@ -57,6 +57,7 @@ export const editProfile = (name, about) => {
   })
     .then(res => {
       if (res.ok) {
+        renderSave(popup, buttonTextSave, true)
         return res.json();
       }
       return Promise.reject(`Ошибка: ${res.status}`);
@@ -64,12 +65,13 @@ export const editProfile = (name, about) => {
     .then((result) => {
         console.log(result)
       })
-      .catch((err) => {
+    .catch((err) => {
         console.log(err); // выводим ошибку в консоль
-      }); 
+    })
+    .finally(() => renderSave(popup, buttonTextSave, false))
 }
 
-export const editAvatar = (avatarLink) => {
+export const editAvatar = (popup, avatarLink) => {
   return fetch(`${config.baseUrl}/users/me/avatar`, {
     method: 'PATCH',
     headers: config.headers,
@@ -79,6 +81,7 @@ export const editAvatar = (avatarLink) => {
   })
     .then(res => {
       if (res.ok) {
+        renderSave(popup, buttonTextSave, true)
         return res.json();
       }
       return Promise.reject(`Ошибка: ${res.status}`);
@@ -88,10 +91,11 @@ export const editAvatar = (avatarLink) => {
       })
       .catch((err) => {
         console.log(err); // выводим ошибку в консоль
-      }); 
+      })
+      .finally(() => renderSave(popup, buttonTextSave, false))
 }
 
-export const addCard = (name, link) => {
+export const addCard = (popup, name, link) => {
   return fetch(`${config.baseUrl}/cards`, {
     method: 'POST',
     headers: config.headers,
@@ -102,6 +106,7 @@ export const addCard = (name, link) => {
   })
     .then(res => {
       if (res.ok) {
+        renderSave(popup, buttonTextCreate, true)
         return res.json();
       }
       return Promise.reject(`Ошибка: ${res.status}`);
@@ -112,7 +117,8 @@ export const addCard = (name, link) => {
       })
       .catch((err) => {
         console.log(err); // выводим ошибку в консоль
-      }); 
+      })
+      .finally(() => renderSave(popup, buttonTextCreate, false))
 }
 
 export const deleteCard = (cardId) => {
