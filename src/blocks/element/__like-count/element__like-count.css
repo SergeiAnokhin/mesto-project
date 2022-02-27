@@ -1,0 +1,4 @@
+.element__like-count {
+    grid-area: like;
+    color: #000;
+}

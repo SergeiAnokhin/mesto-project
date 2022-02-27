@@ -1,6 +1,6 @@
-const forms = document.forms;
+export const forms = document.forms;
 
-const showInputError = (formElement, inputElement, errorMessage, {inputErrorClass, errorClass}) => {
+export const showInputError = (formElement, inputElement, errorMessage, {inputErrorClass, errorClass}) => {
 
     const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
   
@@ -9,7 +9,7 @@ const showInputError = (formElement, inputElement, errorMessage, {inputErrorClas
     errorElement.classList.add(errorClass);
   };
   
-  const hideInputError = (formElement, inputElement, {inputErrorClass, errorClass}) => {
+export const hideInputError = (formElement, inputElement, {inputErrorClass, errorClass}) => {
   
     const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
   
@@ -18,13 +18,13 @@ const showInputError = (formElement, inputElement, errorMessage, {inputErrorClas
     errorElement.textContent = '';
   }; 
   
-  const hasInvalidInput = (inputList) => {
+export const hasInvalidInput = (inputList) => {
     return inputList.some((inputElement) => {
       return !inputElement.validity.valid;
     })
   }; 
   
-  const toggleButtonState = (inputList, buttonElement) => {
+export const toggleButtonState = (inputList, buttonElement) => {
     if (hasInvalidInput(inputList)) {
       buttonElement.disabled = true;
     } else {
@@ -32,7 +32,7 @@ const showInputError = (formElement, inputElement, errorMessage, {inputErrorClas
     }
   }; 
   
-  const isValid = (formElement, inputElement, rest) => {
+  export const isValid = (formElement, inputElement, rest) => {
     if (!inputElement.validity.valid) {
       showInputError(formElement, inputElement, inputElement.validationMessage, rest);
     } else {
@@ -40,7 +40,7 @@ const showInputError = (formElement, inputElement, errorMessage, {inputErrorClas
     }
   }; 
   
-  const setEventListeners = (formElement, {inputSelector, submitButtonSelector, ...rest}) => {
+  export const setEventListeners = (formElement, {inputSelector, submitButtonSelector, ...rest}) => {
     const inputList = Array.from(formElement.querySelectorAll(inputSelector));
     const buttonElement = formElement.querySelector(submitButtonSelector);
   
@@ -54,7 +54,7 @@ const showInputError = (formElement, inputElement, errorMessage, {inputErrorClas
     });
   }; 
   
-  const enableValidation = ({formSelector, ...rest}) => {
+  export const enableValidation = ({formSelector, ...rest}) => {
   
     const formList = Array.from(forms);
   
@@ -66,5 +66,3 @@ const showInputError = (formElement, inputElement, errorMessage, {inputErrorClas
     });
   
   };
-
-  export { enableValidation, setEventListeners, isValid, toggleButtonState, hasInvalidInput, hideInputError, showInputError }

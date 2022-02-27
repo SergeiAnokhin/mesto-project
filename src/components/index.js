@@ -1,6 +1,6 @@
 import '../pages/index.css';
 import { enableValidation } from "./validate.js";
-import { modal, addElementPopup, editAvatarPopup, editProfilePopup, submitForm, editProfileSubmit, editAvatarSubmit, addElementSubmit } from "./modal.js";
+import { modal, addElementPopup, editAvatarPopup, editProfilePopup, submitForm, editProfileSubmit, editAvatarSubmit, addElementSubmit, deleteElementSubmit } from "./modal.js";
 import { profile, buttons } from "./utils.js";
 import { config, getInitialCards, getProfile, addCard } from './api.js';
 
@@ -34,6 +34,7 @@ submitForm(modal.editPopup, editProfileSubmit);
 
 // Отправка данных из формы добавления карточек
 submitForm(modal.addPopup, addElementSubmit);
+// submitForm(modal.deletePopup, deleteElementSubmit);
 
 // Отправка данных из формы редактирования аватара
 submitForm(modal.avatarPopup, editAvatarSubmit)

@@ -1,7 +1,7 @@
 import { addElements, addElement } from "./card";
 import { addProfile } from "./utils";
 
-const config = {
+export const config = {
   baseUrl: 'https://nomoreparties.co/v1/plus-cohort7',
   headers: {
     authorization: 'a34ef1b9-3d1d-4a73-a9bd-379580b0d476',
@@ -133,6 +133,42 @@ export const deleteCard = (cardId) => {
       .catch((err) => {
         console.log(err); // выводим ошибку в консоль
       }); 
-} 
+}
 
-export { config }
+export const addLike = (cardId) => {
+  return fetch(`${config.baseUrl}/cards/likes/${cardId}`, {
+    method: 'PUT',
+    headers: config.headers,
+  })
+    .then(res => {
+      if (res.ok) {
+        return res.json();
+      }
+      return Promise.reject(`Ошибка: ${res.status}`);
+    })
+    .then((result) => {
+        console.log(result)
+      })
+      .catch((err) => {
+        console.log(err); // выводим ошибку в консоль
+      }); 
+}
+
+export const deleteLike = (cardId) => {
+  return fetch(`${config.baseUrl}/cards/likes/${cardId}`, {
+    method: 'DELETE',
+    headers: config.headers,
+  })
+    .then(res => {
+      if (res.ok) {
+        return res.json();
+      }
+      return Promise.reject(`Ошибка: ${res.status}`);
+    })
+    .then((result) => {
+        console.log(result)
+      })
+      .catch((err) => {
+        console.log(err); // выводим ошибку в консоль
+      }); 
+}

@@ -3,7 +3,7 @@ import { createCard, elements } from "./card.js";
 import { hasInvalidInput, toggleButtonState } from './validate.js';
 import { config, addCard, editProfile, editAvatar } from "./api.js";
 
-const modal = {
+export const modal = {
     editPopup : document.querySelector('#popup_edit-profile'),
     addPopup : document.querySelector('#popup_add-element'),
     deletePopup : document.querySelector('#popup_delete-element'),
@@ -22,7 +22,7 @@ const modal = {
     placeName : document.querySelector('[name="place-name"]')
 }
 
-function clearErrors(popup) {
+export function clearErrors(popup) {
     const inputList = Array.from(popup.querySelectorAll('.form__input'));
     const errorList = Array.from(popup.querySelectorAll('.form__input-error'));
     const buttonElement = popup.querySelector('.form__button');
@@ -42,7 +42,7 @@ function clearErrors(popup) {
 }
 
 // Модальное окно редактирования профиля
-function editProfilePopup() {
+export function editProfilePopup() {
     modal.profileNamePopup.value = profile.profileName.textContent;
     modal.profileInfoPopup.value = profile.profileInfo.textContent;
     openPopup(modal.editPopup);
@@ -50,14 +50,14 @@ function editProfilePopup() {
 }
 
 // Модальное окно редактирования аватара
-function editAvatarPopup() {
+export function editAvatarPopup() {
     modal.avatarLinkPopup.value = '';
     openPopup(modal.avatarPopup);
     clearErrors(modal.avatarPopup);
 }
 
 // Модальное окно добавления карточек
-function addElementPopup() {
+export function addElementPopup() {
     modal.imgLink.value = '';
     modal.placeName.value = '';
     openPopup(modal.addPopup);
@@ -65,47 +65,47 @@ function addElementPopup() {
 }
 
 // Функция-обработчик закрытия попапа при клике по оверлею
-function closePopupOverlay(evt) {
+export function closePopupOverlay(evt) {
     if (evt.target.classList.contains('popup')) {
         closePopup(evt.currentTarget);
     }
 }
 
 // Функция-обработчик закрытия попапа при клике по кнопке крестик
-function closePopupBtn(evt) {
+export function closePopupBtn(evt) {
     if (evt.target.classList.contains('popup__close')) {
         closePopup(evt.currentTarget);
     }
 }
 
 // Функция-обработчик закрытия попапа при нажатии клавиши Escape
-function closePopupEscape(evt) {
+export function closePopupEscape(evt) {
     if (evt.key === 'Escape' && document.querySelector('.popup_opened')) {
         closePopup(document.querySelector('.popup_opened'));
     }
 }
 
   // Функция добавления обработчиков событий закрытия модального окна
-function closePopupEvents(popup) {
+export function closePopupEvents(popup) {
     popup.addEventListener('click', closePopupOverlay);
     popup.addEventListener('click', closePopupBtn);
     document.addEventListener('keydown', closePopupEscape)
 }
 
  // Функция снятия обработчиков событий закрытия модального окна
-function closePopupEventsRemove(popup) {
+export function closePopupEventsRemove(popup) {
     popup.removeEventListener('click', closePopupOverlay);
     popup.removeEventListener('click', closePopupBtn);
     document.removeEventListener('keydown', closePopupEscape)
 }
 
 // Функция отправки данных из формы
-function submitForm(popup, func) {
+export function submitForm(popup, func) {
     popup.querySelector('.form').addEventListener('submit', func); 
 }
 
   // Добавление данных из формы редактирования профиля
-function editProfileSubmit(evt) {
+export function editProfileSubmit(evt) {
     evt.preventDefault();
     if (modal.profileNamePopup.value !== '' && modal.profileInfoPopup.value !== '') {
         profile.profileName.textContent = modal.profileNamePopup.value;
@@ -116,7 +116,7 @@ function editProfileSubmit(evt) {
 }
 
   // Добавление данных из формы редактирования аватара
-function editAvatarSubmit(evt) {
+export function editAvatarSubmit(evt) {
     evt.preventDefault();
     profile.avatarImg.src = modal.avatarLinkPopup.value;
     editAvatar(modal.avatarLinkPopup.value);
@@ -124,12 +124,10 @@ function editAvatarSubmit(evt) {
 }
 
   // Добавление данных из формы добавления карточек
-function addElementSubmit(evt) {
+export function addElementSubmit(evt) {
     evt.preventDefault();
     if (modal.imgLink.value !== '' && modal.placeName.value !== '') {
         addCard(modal.placeName.value, modal.imgLink.value);
         closePopup(modal.addPopup);
     };
 }
-
-export { modal, editAvatarPopup, editProfilePopup, addElementPopup, closePopupEvents, closePopupEventsRemove, submitForm, editProfileSubmit, editAvatarSubmit, addElementSubmit }
