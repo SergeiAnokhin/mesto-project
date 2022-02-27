@@ -63,7 +63,7 @@ export const editProfile = (popup, name, about) => {
       return Promise.reject(`Ошибка: ${res.status}`);
     })
     .then((result) => {
-        console.log(result)
+        return result
       })
     .catch((err) => {
         console.log(err); // выводим ошибку в консоль
@@ -87,7 +87,7 @@ export const editAvatar = (popup, avatarLink) => {
       return Promise.reject(`Ошибка: ${res.status}`);
     })
     .then((result) => {
-        console.log(result)
+        return result;
       })
     .catch((err) => {
         console.log(err); // выводим ошибку в консоль
@@ -112,7 +112,6 @@ export const addCard = (popup, name, link) => {
       return Promise.reject(`Ошибка: ${res.status}`);
     })
     .then((result) => {
-      console.log(result)
         addElement(result)
       })
     .catch((err) => {
@@ -133,7 +132,7 @@ export const deleteCard = (cardId) => {
       return Promise.reject(`Ошибка: ${res.status}`);
     })
     .then((result) => {
-        console.log(result)
+        return result;
       })
       .catch((err) => {
         console.log(err); // выводим ошибку в консоль
@@ -152,7 +151,7 @@ export const addLike = (cardId) => {
       return Promise.reject(`Ошибка: ${res.status}`);
     })
     .then((result) => {
-        console.log(result)
+        return result;
       })
       .catch((err) => {
         console.log(err); // выводим ошибку в консоль
@@ -171,7 +170,7 @@ export const deleteLike = (cardId) => {
       return Promise.reject(`Ошибка: ${res.status}`);
     })
     .then((result) => {
-        console.log(result)
+        return result;
       })
       .catch((err) => {
         console.log(err); // выводим ошибку в консоль
