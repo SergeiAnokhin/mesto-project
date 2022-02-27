@@ -1,8 +1,8 @@
 import '../pages/index.css';
 import { enableValidation } from "./validate.js";
-import { modal, addElementPopup, editAvatarPopup, editProfilePopup, submitForm, editProfileSubmit, editAvatarSubmit, addElementSubmit, deleteElementSubmit } from "./modal.js";
+import { modal, addElementPopup, editAvatarPopup, editProfilePopup, submitForm, editProfileSubmit, editAvatarSubmit, addElementSubmit} from "./modal.js";
 import { profile, buttons } from "./utils.js";
-import { config, getInitialCards, getProfile, addCard } from './api.js';
+import { getAll } from './api.js';
 
 // ВЫЗОВЫ ФУНКЦИЙ
 
@@ -15,10 +15,7 @@ enableValidation({
     errorClass: 'form__input-error_active'
   });
 
-// Вызов функции формирования карточек при загрузке страницы
-// addElements(initialCards);
-getInitialCards(config.baseUrl, config.headers);
-getProfile(config.baseUrl, config.headers);
+getAll()
 
 // Вызов модального окна редактирования профиля
 buttons.editProfileBtn.addEventListener('click', editProfilePopup);
@@ -34,7 +31,6 @@ submitForm(modal.editPopup, editProfileSubmit);
 
 // Отправка данных из формы добавления карточек
 submitForm(modal.addPopup, addElementSubmit);
-// submitForm(modal.deletePopup, deleteElementSubmit);
 
 // Отправка данных из формы редактирования аватара
 submitForm(modal.avatarPopup, editAvatarSubmit)

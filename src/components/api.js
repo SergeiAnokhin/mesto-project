@@ -10,42 +10,33 @@ export const config = {
   userId : ''
 }
 
-export const getInitialCards = () => {
-  return fetch(`${config.baseUrl}/cards`, {
-    headers: config.headers
-  })
-    .then(res => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Ошибка: ${res.status}`);
-    })
-    .then((result) => {
-        addElements(result)
-      })
-      .catch((err) => {
-        console.log(err); // выводим ошибку в консоль
-      }); 
-}
-
-export const getProfile = () => {
+export const getProfile = new Promise ((resolve, reject) => {
   return fetch(`${config.baseUrl}/users/me`, {
-    headers: config.headers
-  })
-    .then(res => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Ошибка: ${res.status}`);
-    })
-    .then((result) => {
-        config.userId = result._id
-        addProfile(result)
+        headers: config.headers
       })
-      .catch((err) => {
-        console.log(err); // выводим ошибку в консоль
-      }); 
-}
+        .then(res => {
+            resolve(res.json())
+        })
+})
+
+export const getInitialCards = new Promise ((resolve, reject) => {
+  return fetch(`${config.baseUrl}/cards`, {
+        headers: config.headers
+      })
+        .then(res => {
+          if (res.ok) {
+            resolve(res.json())
+          }
+        })
+})
+
+export const getAll = () => {
+  Promise.all([getProfile, getInitialCards]).then(result => {
+    addProfile(result[0])
+    config.userId = result[0]._id
+    addElements(result[1])
+  })
+} 
 
 export const editProfile = (name, about) => {
   return fetch(`${config.baseUrl}/users/me`, {
@@ -133,7 +124,7 @@ export const deleteCard = (cardId) => {
       .catch((err) => {
         console.log(err); // выводим ошибку в консоль
       }); 
-}
+} 
 
 export const addLike = (cardId) => {
   return fetch(`${config.baseUrl}/cards/likes/${cardId}`, {

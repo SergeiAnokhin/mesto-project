@@ -7,6 +7,7 @@ export const templateElement = document.querySelector('.elements__template').con
 
 // Функция создания карточки места
 export function createCard(cardObj) {
+    const cardId = cardObj._id;
     const card = templateElement.querySelector('.element').cloneNode(true);
     card.querySelector('.element__image').src = cardObj.link;
     card.querySelector('.element__image').alt = cardObj.name;
@@ -17,27 +18,8 @@ export function createCard(cardObj) {
     }
   
     card.querySelector('.element__trash').addEventListener('click', () => {
-      card.querySelector('.element__trash').blur();
-
-      function deleteElementBtn(evt) {
-        closePopup(modal.deletePopup);
-        deleteCard(cardObj._id);
-        card.remove();
-        this.removeEventListener('click', deleteElementBtn)
-      }
-  
-      function deleteElementEnter(evt) {
-          if (evt.key === 'Enter') {
-              closePopup(modal.deletePopup);
-              deleteCard(cardObj._id);
-              card.remove();
-              this.removeEventListener('keydown', deleteElementEnter)
-          }
-      }
-
-      openPopup(modal.deletePopup);
-      document.addEventListener('keydown', deleteElementEnter);
-      modal.deletePopup.querySelector('button').addEventListener('click', deleteElementBtn);
+      deleteCard(cardId);
+      card.remove();
       });
   
     const elementLike = card.querySelector('.element__like-button');
@@ -54,11 +36,11 @@ export function createCard(cardObj) {
         if (elementLike.classList.contains('element__like-button_active')) {
           elementLike.classList.remove('element__like-button_active');
           elementLikeCount.textContent = +elementLikeCount.textContent - 1
-          deleteLike(cardObj._id)
+          deleteLike(cardId)
         } else {
           elementLike.classList.add('element__like-button_active');
           elementLikeCount.textContent = +elementLikeCount.textContent + 1
-          addLike(cardObj._id);
+          addLike(cardId);
         }
     });
   
@@ -80,6 +62,7 @@ export function addElements(arrCards) {
 }
 
 export function addElement(cardObj) {
+      console.log(cardObj._id)
       const cardElement = createCard(cardObj);
       elements.prepend(cardElement);
 }
