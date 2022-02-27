@@ -29,3 +29,8 @@ export function addProfile(profileInfo) {
   profile.profileName.textContent = profileInfo.name;
   profile.profileInfo.textContent = profileInfo.about;
 }
+
+export function renderLoading() {
+  const page = document.querySelector('.page');
+  page.classList.add('page-visible');
+}

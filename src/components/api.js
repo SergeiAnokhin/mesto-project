@@ -1,5 +1,5 @@
 import { addElements, addElement } from "./card";
-import { addProfile } from "./utils";
+import { addProfile, renderLoading } from "./utils";
 
 export const config = {
   baseUrl: 'https://nomoreparties.co/v1/plus-cohort7',
@@ -14,9 +14,12 @@ export const getProfile = new Promise ((resolve, reject) => {
   return fetch(`${config.baseUrl}/users/me`, {
         headers: config.headers
       })
-        .then(res => {
-            resolve(res.json())
-        })
+      .then(res => {
+        if (res.ok) {
+          resolve(res.json())
+        }
+        reject(`Ошибка: ${res.status}`);
+      })
 })
 
 export const getInitialCards = new Promise ((resolve, reject) => {
@@ -27,6 +30,7 @@ export const getInitialCards = new Promise ((resolve, reject) => {
           if (res.ok) {
             resolve(res.json())
           }
+          reject(`Ошибка: ${res.status}`);
         })
 })
 
@@ -36,6 +40,10 @@ export const getAll = () => {
     config.userId = result[0]._id
     addElements(result[1])
   })
+  .catch((err) => {
+    console.log(err); // выводим ошибку в консоль
+  })
+  .finally(() => renderLoading());
 } 
 
 export const editProfile = (name, about) => {
