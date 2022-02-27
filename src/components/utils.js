@@ -32,5 +32,5 @@ export function addProfile(profileInfo) {
 
 export function renderLoading() {
   const page = document.querySelector('.page');
-  page.classList.add('page-visible');
+  page.classList.add('page_visible');
 }
