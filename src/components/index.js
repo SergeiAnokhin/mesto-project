@@ -1,8 +1,12 @@
 import '../pages/index.css';
 import { enableValidation } from "./validate.js";
 import { modal, addElementPopup, editAvatarPopup, editProfilePopup, submitForm, editProfileSubmit, editAvatarSubmit, addElementSubmit} from "./modal.js";
-import { profile, buttons } from "./utils.js";
-import { getAll } from './api.js';
+import { profile, buttons, addProfile, user, renderLoading } from "./utils.js";
+import { getProfile, getInitialCards } from './api.js';
+import { addElements } from "./card";
+
+
+const getAll = Promise.all([getProfile(), getInitialCards()]);
 
 // ВЫЗОВЫ ФУНКЦИЙ
 
@@ -15,7 +19,16 @@ enableValidation({
     errorClass: 'form__input-error_active'
   });
 
-getAll()
+getAll
+  .then(result => {
+    user.id = result[0]._id
+    addProfile(result[0])
+    addElements(result[1], user.id)
+  })
+  .catch((err) => {
+    console.log(err); // выводим ошибку в консоль
+  })
+  .finally(() => renderLoading());
 
 // Вызов модального окна редактирования профиля
 buttons.editProfileBtn.addEventListener('click', editProfilePopup);
