@@ -1,8 +1,12 @@
 import '../pages/index.css';
 import { enableValidation } from "./validate.js";
-import { modal, addElementPopup, editAvatarPopup, editProfilePopup, submitForm, editProfileSubmit, editAvatarSubmit, addElementSubmit} from "./modal.js";
-import { profile, buttons } from "./utils.js";
-import { getAll } from './api.js';
+import { modal, openAddElementPopup, openEditAvatarPopup, openEditProfilePopup, submitForm, handleProfileFormSubmit, handleAvatarFormSubmit, handleCardFormSubmit} from "./modal.js";
+import { profile, buttons, addProfile, user, renderLoading } from "./utils.js";
+import { getProfile, getInitialCards } from './api.js';
+import { addElements } from "./card";
+
+
+const getAll = Promise.all([getProfile(), getInitialCards()]);
 
 // ВЫЗОВЫ ФУНКЦИЙ
 
@@ -15,22 +19,31 @@ enableValidation({
     errorClass: 'form__input-error_active'
   });
 
-getAll()
+getAll
+  .then(result => {
+    user.id = result[0]._id
+    addProfile(result[0])
+    addElements(result[1], user.id)
+  })
+  .catch((err) => {
+    console.log(err); // выводим ошибку в консоль
+  })
+  .finally(() => renderLoading());
 
 // Вызов модального окна редактирования профиля
-buttons.editProfileBtn.addEventListener('click', editProfilePopup);
+buttons.editProfileBtn.addEventListener('click', openEditProfilePopup);
 
 // Вызов модального окна добавления карточек
-buttons.addElementBtn.addEventListener('click', addElementPopup);
+buttons.addElementBtn.addEventListener('click', openAddElementPopup);
 
 // Вызов модального окна редактирования аватара
-profile.avatarImg.addEventListener('click', editAvatarPopup)
+profile.avatarImg.addEventListener('click', openEditAvatarPopup)
 
 // Отправка данных из формы редактирования профиля
-submitForm(modal.editPopup, editProfileSubmit);
+submitForm(modal.editPopup, handleProfileFormSubmit);
 
 // Отправка данных из формы добавления карточек
-submitForm(modal.addPopup, addElementSubmit);
+submitForm(modal.addPopup, handleCardFormSubmit);
 
 // Отправка данных из формы редактирования аватара
-submitForm(modal.avatarPopup, editAvatarSubmit)
+submitForm(modal.avatarPopup, handleAvatarFormSubmit)
