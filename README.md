@@ -14,6 +14,8 @@
 - Модули JavaScript.
 - Сборка проекта Webpack
 
+[Ссылка на GitHub Pages](https://sergeianokhin.github.io/mesto-project/)
+
 ---
 
 **Студент:** Сергей Анохин
