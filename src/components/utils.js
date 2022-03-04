@@ -1,4 +1,4 @@
-import { closePopupEvents, closePopupEventsRemove } from "./modal.js";
+import { setCloseListeners, removeCloseListeners } from "./modal.js";
 
 export const profile = {
     profileName : document.querySelector('.profile__name'),
@@ -21,36 +21,37 @@ export const buttonTextCreate = {
   doing : 'Создание...'
 }
 
+export const user = {};
+
 
 // Открытие модального окна
-export function openPopup(popup) {
+export const openPopup = (popup) => {
     popup.classList.add('popup_opened');
-    closePopupEvents(popup);
+    setCloseListeners(popup);
 }
 
   // Закрытие модального окна
-export function closePopup(popup) {
+export const closePopup = (popup) => {
     popup.classList.remove('popup_opened');
-    closePopupEventsRemove(popup)
+    removeCloseListeners(popup)
 }
 
-export function addProfile(profileInfo) {
+export const addProfile = (profileInfo) => {
   profile.avatarImg.src = profileInfo.avatar;
   profile.profileName.textContent = profileInfo.name;
   profile.profileInfo.textContent = profileInfo.about;
 }
 
-export function renderLoading() {
+export const renderLoading = () => {
   const page = document.querySelector('.page');
   page.classList.add('page_visible');
 }
 
-export function renderSave(popup, buttonText, isSave) {
+export const renderSave = (popup, buttonText, isSave) => {
     const button = popup.querySelector('.form__button');
     if (isSave) {
       button.textContent = buttonText.doing
     } else {
-        button.textContent = buttonText.do
-        closePopup(popup)
+      button.textContent = buttonText.do
     }
 }
