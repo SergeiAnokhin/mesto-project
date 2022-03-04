@@ -1,4 +1,4 @@
-import { closePopupEvents, closePopupEventsRemove } from "./modal.js";
+import { setCloseListeners, removeCloseListeners } from "./modal.js";
 
 export const profile = {
     profileName : document.querySelector('.profile__name'),
@@ -27,13 +27,13 @@ export const user = {};
 // Открытие модального окна
 export const openPopup = (popup) => {
     popup.classList.add('popup_opened');
-    closePopupEvents(popup);
+    setCloseListeners(popup);
 }
 
   // Закрытие модального окна
 export const closePopup = (popup) => {
     popup.classList.remove('popup_opened');
-    closePopupEventsRemove(popup)
+    removeCloseListeners(popup)
 }
 
 export const addProfile = (profileInfo) => {

@@ -42,7 +42,7 @@ export const clearErrors = (popup) => {
 }
 
 // Модальное окно редактирования профиля
-export const editProfilePopup = () => {
+export const openEditProfilePopup = () => {
     modal.profileNamePopup.value = profile.profileName.textContent;
     modal.profileInfoPopup.value = profile.profileInfo.textContent;
     openPopup(modal.editPopup);
@@ -50,14 +50,14 @@ export const editProfilePopup = () => {
 }
 
 // Модальное окно редактирования аватара
-export const editAvatarPopup = () => {
+export const openEditAvatarPopup = () => {
     modal.avatarLinkPopup.value = '';
     openPopup(modal.avatarPopup);
     clearErrors(modal.avatarPopup);
 }
 
 // Модальное окно добавления карточек
-export const addElementPopup = () => {
+export const openAddElementPopup = () => {
     modal.imgLink.value = '';
     modal.placeName.value = '';
     openPopup(modal.addPopup);
@@ -80,20 +80,21 @@ export const closePopupBtn = (evt) => {
 
 // Функция-обработчик закрытия попапа при нажатии клавиши Escape
 export const closePopupEscape = (evt) => {
-    if (evt.key === 'Escape' && document.querySelector('.popup_opened')) {
-        closePopup(document.querySelector('.popup_opened'));
+    if (evt.key === 'Escape') {
+        const openedPopup = document.querySelector('.popup_opened')
+        openedPopup && closePopup(openedPopup);
     }
 }
 
   // Функция добавления обработчиков событий закрытия модального окна
-export const closePopupEvents = (popup) => {
+export const setCloseListeners = (popup) => {
     popup.addEventListener('click', closePopupOverlay);
     popup.addEventListener('click', closePopupBtn);
     document.addEventListener('keydown', closePopupEscape)
 }
 
  // Функция снятия обработчиков событий закрытия модального окна
-export const closePopupEventsRemove = (popup) => {
+export const removeCloseListeners = (popup) => {
     popup.removeEventListener('click', closePopupOverlay);
     popup.removeEventListener('click', closePopupBtn);
     document.removeEventListener('keydown', closePopupEscape)
@@ -105,7 +106,7 @@ export const submitForm = (popup, func) => {
 }
 
   // Добавление данных из формы редактирования профиля
-export const editProfileSubmit = (evt) => {
+export const handleProfileFormSubmit = (evt) => {
     evt.preventDefault();
     if (modal.profileNamePopup.value !== '' && modal.profileInfoPopup.value !== '') {
         renderSave(modal.editPopup, buttonTextSave, true)
@@ -125,7 +126,7 @@ export const editProfileSubmit = (evt) => {
 }
 
   // Добавление данных из формы редактирования аватара
-export const editAvatarSubmit = (evt) => {
+export const handleAvatarFormSubmit = (evt) => {
     evt.preventDefault();
     renderSave(modal.avatarPopup, buttonTextSave, true)
     editAvatar(modal.avatarLinkPopup.value)
@@ -142,7 +143,7 @@ export const editAvatarSubmit = (evt) => {
 }
 
   // Добавление данных из формы добавления карточек
-export const addElementSubmit = (evt) => {
+export const handleCardFormSubmit = (evt) => {
     evt.preventDefault();
     renderSave(modal.addPopup, buttonTextCreate, true)
     if (modal.imgLink.value !== '' && modal.placeName.value !== '') {

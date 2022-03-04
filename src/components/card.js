@@ -1,6 +1,6 @@
 import { addLike, deleteCard, deleteLike } from './api.js';
 import { modal } from './modal.js'
-import { openPopup, closePopup } from './utils.js';
+import { openPopup } from './utils.js';
 
 export const elements = document.querySelector('.elements');
 export const templateElement = document.querySelector('.elements__template').content;
@@ -9,15 +9,19 @@ export const templateElement = document.querySelector('.elements__template').con
 export const createCard = (cardObj, userId) => {
     const cardId = cardObj._id;
     const card = templateElement.querySelector('.element').cloneNode(true);
-    card.querySelector('.element__image').src = cardObj.link;
-    card.querySelector('.element__image').alt = cardObj.name;
-    card.querySelector('.element__title').textContent = cardObj.name;
+    const cardImage = card.querySelector('.element__image');
+    const cardTitle = card.querySelector('.element__title');
+    const cardTrashBtn = card.querySelector('.element__trash');
+
+    cardImage.src = cardObj.link;
+    cardImage.alt = cardObj.name;
+    cardTitle.textContent = cardObj.name;
 
     if (cardObj.owner._id !== userId) {
-      card.querySelector('.element__trash').style.display = 'none';
+      cardTrashBtn.style.display = 'none';
     }
   
-    card.querySelector('.element__trash').addEventListener('click', () => {
+    cardTrashBtn.addEventListener('click', () => {
       deleteCard(cardId)
       .then(() => {
         card.remove();
@@ -29,6 +33,7 @@ export const createCard = (cardObj, userId) => {
   
     const elementLike = card.querySelector('.element__like-button');
     const elementLikeCount = card.querySelector('.element__like-count');
+
     elementLikeCount.textContent = cardObj.likes.length;
 
     cardObj.likes.forEach(item => {
@@ -59,10 +64,10 @@ export const createCard = (cardObj, userId) => {
         }
     });
   
-    card.querySelector('.element__image').addEventListener('click', () => {
-      modal.popupImage.src = card.querySelector('.element__image').src;
-      modal.popupImage.alt = card.querySelector('.element__title').textContent;
-      modal.popupPlaceName.textContent = card.querySelector('.element__title').textContent;
+    cardImage.addEventListener('click', () => {
+      modal.popupImage.src = cardObj.link;
+      modal.popupImage.alt = cardObj.name;
+      modal.popupPlaceName.textContent = cardObj.name;
       openPopup(modal.imgPopup);
     });
   
