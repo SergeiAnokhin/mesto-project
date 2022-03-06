@@ -24,11 +24,12 @@ getAll
     user.id = result[0]._id
     addProfile(result[0])
     addElements(result[1], user.id)
+      renderLoading()
   })
   .catch((err) => {
     console.log(err); // выводим ошибку в консоль
   })
-  .finally(() => renderLoading());
+  // .finally(() => renderLoading());
 
 // Вызов модального окна редактирования профиля
 buttons.editProfileBtn.addEventListener('click', openEditProfilePopup);

@@ -49,7 +49,9 @@ export const addProfile = (profileInfo) => {
 
 export const renderLoading = () => {
   const page = document.querySelector('.page');
+  const loading = document.querySelector('.loading');
   page.classList.add('page_visible');
+  loading.classList.add('loading_hidden')
 }
 
 export const renderSave = (popup, buttonText, isSave) => {

@@ -6,6 +6,7 @@
     color: #fff;
     padding: 45px 19px 55px;
     box-sizing: border-box;
+    display: none;
     visibility: hidden;
     opacity: 0;
     transition: visibility .1s, opacity .1s linear;

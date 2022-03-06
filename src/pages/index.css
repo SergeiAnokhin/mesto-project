@@ -9,6 +9,10 @@
 @import url(../blocks/page/page.css);
 @import url(../blocks/page/_visible/page_visible.css);
 
+/* Loading */
+@import url(../blocks/loading/loading.css);
+@import url(../blocks/loading/_hidden/loading_hidden.css);
+
 /* Header */
 @import url(../blocks/header/header.css);
 @import url(../blocks/header/__logo/header__logo.css);
