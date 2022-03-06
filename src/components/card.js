@@ -5,51 +5,47 @@ import { openPopup, closePopup, renderSave, buttonTextDelete} from './utils.js';
 export const elements = document.querySelector('.elements');
 export const templateElement = document.querySelector('.elements__template').content;
 
-export const removeElement = (card, cardTrashBtn, cardId) => {
+export const removeElement = (card, cardTrashBtn, cardId, btnText) => {
   cardTrashBtn.addEventListener('click', () => {
 
-    openPopup(modal.deletePopup);
-    cardTrashBtn.blur();
+    const popup = modal.deletePopup;
+    const popupBtn = popup.querySelector('button');
 
-    const popupBtn = modal.deletePopup.querySelector('button');
+    openPopup(popup);
+
+    setTimeout(() => {
+      popup.tabIndex = 1;
+      popup.focus()
+    }, 50)
+
+    const deleteElement = () => {
+      renderSave(popup, btnText, true)
+          deleteCard(cardId)
+          .then(() => {
+            card.remove();
+            closePopup(popup)
+            popup.removeEventListener('keydown', deleteElementEnter)
+            popupBtn.removeEventListener('click', deleteElementBtn);
+          })
+          .catch((err) => {
+            console.log(err);
+          })
+          .finally(() => 
+            renderSave(popup, btnText, false)
+          )
+    }
 
     const deleteElementEnter = (evt) => {
       if (evt.key === 'Enter') {
-          renderSave(modal.deletePopup, buttonTextDelete, true)
-          deleteCard(cardId)
-          .then(res => {
-            card.remove();
-            closePopup(modal.deletePopup)
-            document.removeEventListener('keydown', deleteElementEnter)
-            popupBtn.removeEventListener('click', deleteElementBtn);
-          })
-          .catch((err) => {
-            console.log(err);
-          })
-          .finally(() => 
-            renderSave(modal.deletePopup, buttonTextDelete, false)
-          )
+        deleteElement()
       }
     }
 
-    const deleteElementBtn = (evt) => {
-      renderSave(modal.deletePopup, buttonTextDelete, true)
-          deleteCard(cardId)
-          .then(res => {
-            card.remove();
-            closePopup(modal.deletePopup)
-            document.removeEventListener('keydown', deleteElementEnter)
-            popupBtn.removeEventListener('click', deleteElementBtn);
-          })
-          .catch((err) => {
-            console.log(err);
-          })
-          .finally(() => 
-            renderSave(modal.deletePopup, buttonTextDelete, false)
-          )
+    const deleteElementBtn = () => {
+        deleteElement()
     }
 
-    document.addEventListener('keydown', deleteElementEnter);
+    popup.addEventListener('keydown', deleteElementEnter);
     popupBtn.addEventListener('click', deleteElementBtn);
   })
 }
@@ -70,7 +66,7 @@ export const createCard = (cardObj, userId) => {
       cardTrashBtn.style.display = 'none';
     }
 
-    removeElement(card, cardTrashBtn, cardId)
+    removeElement(card, cardTrashBtn, cardId, buttonTextDelete)
 
   
     const elementLike = card.querySelector('.element__like-button');
