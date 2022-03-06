@@ -21,6 +21,11 @@ export const buttonTextCreate = {
   doing : 'Создание...'
 }
 
+export const buttonTextDelete = {
+  do : 'Да',
+  doing : 'Удаление...'
+}
+
 export const user = {};
 
 

@@ -1,9 +1,58 @@
 import { addLike, deleteCard, deleteLike } from './api.js';
 import { modal } from './modal.js'
-import { openPopup } from './utils.js';
+import { openPopup, closePopup, renderSave, buttonTextDelete} from './utils.js';
 
 export const elements = document.querySelector('.elements');
 export const templateElement = document.querySelector('.elements__template').content;
+
+export const removeElement = (card, cardTrashBtn, cardId) => {
+  cardTrashBtn.addEventListener('click', () => {
+
+    openPopup(modal.deletePopup);
+    cardTrashBtn.blur();
+
+    const popupBtn = modal.deletePopup.querySelector('button');
+
+    const deleteElementEnter = (evt) => {
+      if (evt.key === 'Enter') {
+          renderSave(modal.deletePopup, buttonTextDelete, true)
+          deleteCard(cardId)
+          .then(res => {
+            card.remove();
+            closePopup(modal.deletePopup)
+            document.removeEventListener('keydown', deleteElementEnter)
+            popupBtn.removeEventListener('click', deleteElementBtn);
+          })
+          .catch((err) => {
+            console.log(err);
+          })
+          .finally(() => 
+            renderSave(modal.deletePopup, buttonTextDelete, false)
+          )
+      }
+    }
+
+    const deleteElementBtn = (evt) => {
+      renderSave(modal.deletePopup, buttonTextDelete, true)
+          deleteCard(cardId)
+          .then(res => {
+            card.remove();
+            closePopup(modal.deletePopup)
+            document.removeEventListener('keydown', deleteElementEnter)
+            popupBtn.removeEventListener('click', deleteElementBtn);
+          })
+          .catch((err) => {
+            console.log(err);
+          })
+          .finally(() => 
+            renderSave(modal.deletePopup, buttonTextDelete, false)
+          )
+    }
+
+    document.addEventListener('keydown', deleteElementEnter);
+    popupBtn.addEventListener('click', deleteElementBtn);
+  })
+}
 
 // Функция создания карточки места
 export const createCard = (cardObj, userId) => {
@@ -20,16 +69,9 @@ export const createCard = (cardObj, userId) => {
     if (cardObj.owner._id !== userId) {
       cardTrashBtn.style.display = 'none';
     }
-  
-    cardTrashBtn.addEventListener('click', () => {
-      deleteCard(cardId)
-      .then(() => {
-        card.remove();
-      })
-      .catch((err) => {
-        console.log(err);
-      }); 
-    });
+
+    removeElement(card, cardTrashBtn, cardId)
+
   
     const elementLike = card.querySelector('.element__like-button');
     const elementLikeCount = card.querySelector('.element__like-count');
