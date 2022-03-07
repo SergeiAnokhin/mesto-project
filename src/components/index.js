@@ -5,7 +5,6 @@ import { profile, buttons, addProfile, user, renderLoading } from "./utils.js";
 import { getProfile, getInitialCards } from './api.js';
 import { addElements } from "./card";
 
-
 const getAll = Promise.all([getProfile(), getInitialCards()]);
 
 // ВЫЗОВЫ ФУНКЦИЙ
@@ -19,17 +18,17 @@ enableValidation({
     errorClass: 'form__input-error_active'
   });
 
+// Получение данных пользователя и карточек при загрузке страницы
 getAll
   .then(result => {
     user.id = result[0]._id
     addProfile(result[0])
     addElements(result[1], user.id)
-      renderLoading()
+    renderLoading()
   })
   .catch((err) => {
     console.log(err); // выводим ошибку в консоль
   })
-  // .finally(() => renderLoading());
 
 // Вызов модального окна редактирования профиля
 buttons.editProfileBtn.addEventListener('click', openEditProfilePopup);

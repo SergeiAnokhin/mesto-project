@@ -22,6 +22,7 @@ export const modal = {
     placeName : document.querySelector('[name="place-name"]')
 }
 
+// Функции очистки ошибок при открытии модального окна
 export const clearErrors = (popup) => {
     const inputList = Array.from(popup.querySelectorAll('.form__input'));
     const errorList = Array.from(popup.querySelectorAll('.form__input-error'));
