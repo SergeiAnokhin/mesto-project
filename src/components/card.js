@@ -7,10 +7,10 @@ export const templateElement = document.querySelector('.elements__template').con
 
 // Функция удаления карточки с подтверждением в модальном окне
 export const removeElement = (card, cardTrashBtn, cardId, btnText) => {
+  
   cardTrashBtn.addEventListener('click', () => {
 
     const popup = modal.deletePopup;
-    const popupBtn = popup.querySelector('button');
 
     openPopup(popup);
 
@@ -21,14 +21,13 @@ export const removeElement = (card, cardTrashBtn, cardId, btnText) => {
     }, 50)
 
     // Удаление елемента (карточки)
-    const deleteElement = () => {
+    const deleteElement = (cardId) => {
       renderSave(popup, btnText, true)
           deleteCard(cardId)
           .then(() => {
             card.remove();
             closePopup(popup)
-            popup.removeEventListener('keydown', deleteElementEnter)
-            popupBtn.removeEventListener('click', deleteElementBtn);
+            removeEventListeners()
           })
           .catch((err) => {
             console.log(err);
@@ -41,18 +40,34 @@ export const removeElement = (card, cardTrashBtn, cardId, btnText) => {
     // Удаление по нажатию на Enter
     const deleteElementEnter = (evt) => {
       if (evt.key === 'Enter') {
-        deleteElement()
+        deleteElement(cardId)
+        removeEventListeners()
+      }
+      if (evt.key === 'Escape') {
+        removeEventListeners()
       }
     }
 
     // Удаление по клику
-    const deleteElementBtn = () => {
-        deleteElement()
+    const deleteElementBtn = (evt) => {
+      if (!popup.classList.contains('popup_opened')) {
+        removeEventListeners()
+      }
+      if (evt.target.classList.contains('form__button_type_delete')) {
+        deleteElement(cardId)
+        removeEventListeners()
+      }
     }
+
+    const removeEventListeners = () => {
+      popup.removeEventListener('keydown', deleteElementEnter)
+      document.removeEventListener('click', deleteElementBtn);
+    }
+   
 
     // Слушатели событий по клику и нажатию Enter
     popup.addEventListener('keydown', deleteElementEnter);
-    popupBtn.addEventListener('click', deleteElementBtn);
+    document.addEventListener('click', deleteElementBtn);
   })
 }
 
