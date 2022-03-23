@@ -6,7 +6,7 @@ import Section from '../components/Section1.js';
 import PopupWithImage from '../components/PopupWithImage1.js';
 import PopupWithForm from '../components/PopupWithForm1.js';
 import UserInfo from '../components/UserInfo1.js';
-import { cardsContainer } from '../components/utils/constants';
+import { cardListSection } from '../components/utils/constants';
 
 const api = new Api({
   baseUrl: 'https://nomoreparties.co/v1/plus-cohort7',
@@ -18,16 +18,20 @@ const api = new Api({
 
 api.getInitialCards()
 .then(res => {
-  res.forEach((item) => {
-    const card = new Card(item.name, item.link);
-    const cardElement = card.generate();
-    cardsContainer.append(cardElement);
-  })
+  const cardsList = new Section({
+    items: res,
+    renderer: (cardItem) => {
+      const card = new Card(cardItem, '.elements__template_type_card');
+      const cardElement = card.generate();
+      cardsList.addItem(cardElement);
+    },
+  },
+  cardListSection); 
+  cardsList.renderItems(); 
 })
 .catch(err => {
   console.log('Ошибка получения карточек с сервера', err.message);
 })
-
 
 
 
