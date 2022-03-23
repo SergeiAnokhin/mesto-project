@@ -1,3 +1,3 @@
-export const cardsContainer = document.querySelector('.elements');
+export const cardListSection = '.elements';
   
  
