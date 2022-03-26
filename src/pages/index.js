@@ -37,6 +37,20 @@ const cardsList = new Section({
     console.log('Ошибка получения данных с сервера', err.message);
 })
 
-// const popup = new Popup('#popup_edit-profile');
+const popupProfile = new PopupWithForm({
+  selector: '#popup_edit-profile',
+  handleFormSubmit: (inputValues) => {
 
-// popup.setEventListeners()
+    console.log(inputValues)
+
+      // const message = new UserMessage(inputValues, '.message-template_type_user');
+  
+      // const messageElement = message.generate();
+  
+      // cardsList.setItem(messageElement);
+  }
+});
+
+console.log(popupProfile)
+popupProfile.open()
+popupProfile.setEventListeners()
