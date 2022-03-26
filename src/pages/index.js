@@ -6,7 +6,8 @@ import Section from '../components/Section1.js';
 import PopupWithImage from '../components/PopupWithImage1.js';
 import PopupWithForm from '../components/PopupWithForm1.js';
 import UserInfo from '../components/UserInfo1.js';
-import { cardListSection } from '../components/utils/constants';
+import { cardListSection, selectors } from '../components/utils/constants';
+import Popup from '../components/Popup1';
 
 const api = new Api({
   baseUrl: 'https://nomoreparties.co/v1/plus-cohort7',
@@ -16,22 +17,26 @@ const api = new Api({
   }
 }); 
 
-api.getInitialCards()
+const user = new UserInfo(selectors)
+
+Promise.all([user.getUserInfo(api), api.getInitialCards()])
 .then(res => {
-  const cardsList = new Section({
-    items: res,
-    renderer: (cardItem) => {
-      const card = new Card(cardItem, '.elements__template_type_card');
-      const cardElement = card.generate();
-      cardsList.addItem(cardElement);
+console.log(res)
+const cardsList = new Section({
+      items: res[1],
+      renderer: (cardItem) => {
+        const card = new Card(cardItem, '.elements__template_type_card');
+        const cardElement = card.generate();
+        cardsList.addItem(cardElement);
+      },
     },
-  },
-  cardListSection); 
-  cardsList.renderItems(); 
+    cardListSection); 
+    cardsList.renderItems(); 
 })
 .catch(err => {
-  console.log('Ошибка получения карточек с сервера', err.message);
+    console.log('Ошибка получения данных с сервера', err.message);
 })
 
+// const popup = new Popup('#popup_edit-profile');
 
-
+// popup.setEventListeners()
