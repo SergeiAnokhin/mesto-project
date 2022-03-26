@@ -6,7 +6,7 @@ import Section from '../components/Section1.js';
 import PopupWithImage from '../components/PopupWithImage1.js';
 import PopupWithForm from '../components/PopupWithForm1.js';
 import UserInfo from '../components/UserInfo1.js';
-import { cardListSection, selectors } from '../components/utils/constants';
+import { cardListSection, selectors, buttonEditProfile } from '../components/utils/constants';
 import Popup from '../components/Popup1';
 
 const api = new Api({
@@ -51,11 +51,12 @@ const popupProfile = new PopupWithForm({
   }
 });
 
-
-// popupProfile.open()
-popupProfile.setEventListeners()
-
-
 const popupImage = new PopupWithImage({selector: '#popup_element-image'})
 
 popupImage.setEventListeners()
+
+// Открыть попап редактирвоания профиля
+buttonEditProfile.addEventListener('click', () => {
+  popupProfile.open()
+  popupProfile.setEventListeners()
+})
