@@ -13,7 +13,8 @@ export const validationConfig = {
     inputSelector: '.form__input',
     submitButtonSelector: '.form__button',
     inputErrorClass: 'form__input_type_error',
-    errorClass: 'form__input-error_active'
+    errorClass: 'form__input-error_active',
+    spanSelector: '.form__input-error'
 }
 
 export const buttonAddPlace = document.querySelector('.profile__add-button');

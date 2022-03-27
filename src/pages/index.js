@@ -42,7 +42,6 @@ const cardsList = new Section({
 const popupProfile = new PopupWithForm({
   selector: '#popup_edit-profile',
   handleFormSubmit: (inputValues) => {
-    console.log(inputValues)
     api.editProfile(inputValues['profile-name'], inputValues['profile-info'])
     .then (res => {
       user.setUserInfo(res)
@@ -63,6 +62,9 @@ const formValidationAddPlacePopup = new FormValidator(validationConfig, document
 
 // Открыть попап редактирвоания профиля
 buttonEditProfile.addEventListener('click', () => {
+  popupProfile._popup.querySelector('#profile-name').value = user.getUserInfo().name;
+  popupProfile._popup.querySelector('#profile-info').value = user.getUserInfo().info;
+  formValidationProfilePopup.clearErrors();
   popupProfile.open()
   popupProfile.setEventListeners();
   formValidationProfilePopup.enableValidation();
@@ -86,6 +88,7 @@ const popupAddPlace = new PopupWithForm({
 
 //Открытие попапа добавления места
 buttonAddPlace.addEventListener('click', () => {
+  formValidationAddPlacePopup.clearErrors();
   popupAddPlace.open();
   popupAddPlace.setEventListeners();
   formValidationAddPlacePopup.enableValidation();
