@@ -17,9 +17,10 @@ const api = new Api({
   }
 }); 
 
+const user = new UserInfo(selectors)
+
 Promise.all([api.getProfile(), api.getInitialCards()])
 .then(res => {
-const user = new UserInfo(selectors)
 user.setUserInfo(res[0])
 const userId = res[0]._id;
 const cardsList = new Section({
@@ -41,14 +42,14 @@ const cardsList = new Section({
 const popupProfile = new PopupWithForm({
   selector: '#popup_edit-profile',
   handleFormSubmit: (inputValues) => {
-
- 
-
-      // const message = new UserMessage(inputValues, '.message-template_type_user');
-  
-      // const messageElement = message.generate();
-  
-      // cardsList.setItem(messageElement);
+    console.log(inputValues)
+    api.editProfile(inputValues['profile-name'], inputValues['profile-info'])
+    .then (res => {
+      user.setUserInfo(res)
+    })
+    .catch(err => {
+      console.log('Ошибка редактирования профиля', err.message);
+   })
   }
 });
 
@@ -71,6 +72,15 @@ buttonEditProfile.addEventListener('click', () => {
 const popupAddPlace = new PopupWithForm({
   selector: '#popup_add-element',
   handleFormSubmit: (inputValues) => {
+    api.addCard(inputValues['place-name'], inputValues['image-link'])
+    .then (res => {
+      const card = new Card(res, user.getUserInfo().userId, '.elements__template_type_card');
+      const cardElement = card.generate();
+      document.querySelector(cardListSection).prepend(cardElement);
+    })
+    .catch(err => {
+      console.log('Ошибка добавления карточки', err.message);
+   })
   }
 });
 
