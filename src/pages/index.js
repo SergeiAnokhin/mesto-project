@@ -17,10 +17,9 @@ const api = new Api({
   }
 }); 
 
-const user = new UserInfo(selectors)
-
 Promise.all([api.getProfile(), api.getInitialCards()])
 .then(res => {
+const user = new UserInfo(selectors)
 user.setUserInfo(res[0])
 const userId = res[0]._id;
 const cardsList = new Section({
