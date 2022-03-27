@@ -6,7 +6,7 @@ import Section from '../components/Section1.js';
 import PopupWithImage from '../components/PopupWithImage1.js';
 import PopupWithForm from '../components/PopupWithForm1.js';
 import UserInfo from '../components/UserInfo1.js';
-import { cardListSection, selectors, buttonEditProfile, validationConfig } from '../components/utils/constants';
+import { cardListSection, selectors, buttonEditProfile, validationConfig, buttonAddPlace } from '../components/utils/constants';
 import Popup from '../components/Popup1';
 
 const api = new Api({
@@ -56,13 +56,27 @@ const popupImage = new PopupWithImage({selector: '#popup_element-image'})
 
 popupImage.setEventListeners()
 
+//Валидация попапов
+const formValidationProfilePopup = new FormValidator(validationConfig, document.querySelector('[name="edit-profile"]'))
+const formValidationAddPlacePopup = new FormValidator(validationConfig, document.querySelector('[name="add-element"]'))
+
 // Открыть попап редактирвоания профиля
 buttonEditProfile.addEventListener('click', () => {
   popupProfile.open()
-  popupProfile.setEventListeners()
+  popupProfile.setEventListeners();
+  formValidationProfilePopup.enableValidation();
 })
 
+// Создание попапа редактирования места
+const popupAddPlace = new PopupWithForm({
+  selector: '#popup_add-element',
+  handleFormSubmit: (inputValues) => {
+  }
+});
 
-const formValidation = new FormValidator(validationConfig, document.querySelector('[name="edit-profile"]'))
-formValidation.enableValidation()
-
+//Открытие попапа добавления места
+buttonAddPlace.addEventListener('click', () => {
+  popupAddPlace.open();
+  popupAddPlace.setEventListeners();
+  formValidationAddPlacePopup.enableValidation();
+})
