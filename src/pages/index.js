@@ -6,7 +6,7 @@ import Section from '../components/Section1.js';
 import PopupWithImage from '../components/PopupWithImage1.js';
 import PopupWithForm from '../components/PopupWithForm1.js';
 import UserInfo from '../components/UserInfo1.js';
-import { cardListSection, selectors } from '../components/utils/constants';
+import { cardListSection, selectors, buttonEditProfile, validationConfig } from '../components/utils/constants';
 import Popup from '../components/Popup1';
 
 const api = new Api({
@@ -21,7 +21,6 @@ const user = new UserInfo(selectors)
 
 Promise.all([user.getUserInfo(api), api.getInitialCards()])
 .then(res => {
-console.log(res)
 const cardsList = new Section({
       items: res[1],
       renderer: (cardItem) => {
@@ -32,6 +31,7 @@ const cardsList = new Section({
     },
     cardListSection); 
     cardsList.renderItems(); 
+    // popupImage.open(res[1][0].link, res[1][0].name)
 })
 .catch(err => {
     console.log('Ошибка получения данных с сервера', err.message);
@@ -41,7 +41,7 @@ const popupProfile = new PopupWithForm({
   selector: '#popup_edit-profile',
   handleFormSubmit: (inputValues) => {
 
-    console.log(inputValues)
+ 
 
       // const message = new UserMessage(inputValues, '.message-template_type_user');
   
@@ -51,6 +51,17 @@ const popupProfile = new PopupWithForm({
   }
 });
 
-console.log(popupProfile)
-popupProfile.open()
-popupProfile.setEventListeners()
+const popupImage = new PopupWithImage({selector: '#popup_element-image'})
+
+popupImage.setEventListeners()
+
+// Открыть попап редактирвоания профиля
+buttonEditProfile.addEventListener('click', () => {
+  popupProfile.open()
+  popupProfile.setEventListeners()
+})
+
+
+const formValidation = new FormValidator(validationConfig, document.querySelector('[name="edit-profile"]'))
+formValidation.enableValidation()
+
