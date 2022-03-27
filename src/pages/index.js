@@ -45,6 +45,7 @@ const popupProfile = new PopupWithForm({
     api.editProfile(inputValues['profile-name'], inputValues['profile-info'])
     .then (res => {
       user.setUserInfo(res)
+      popupProfile.close();
     })
     .catch(err => {
       console.log('Ошибка редактирования профиля', err.message);
@@ -79,6 +80,7 @@ const popupAddPlace = new PopupWithForm({
       const card = new Card(res, user.getUserInfo().userId, '.elements__template_type_card');
       const cardElement = card.generate();
       document.querySelector(cardListSection).prepend(cardElement);
+      popupAddPlace.close();
     })
     .catch(err => {
       console.log('Ошибка добавления карточки', err.message);
