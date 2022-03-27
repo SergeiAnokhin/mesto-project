@@ -1,8 +1,10 @@
 export default class Card {
-  constructor(data, selector) {
+  constructor(data, userId, selector) {
     this._name = data.name;
     this._link = data.link;
     this._selector = selector;
+    this._cardOwnerId = data.owner._id;
+    this._userId = userId;
   }
 
   _getElement() {
@@ -21,6 +23,10 @@ export default class Card {
     this._element.querySelector('.element__image').src = this._link;
     this._element.querySelector('.element__title').textContent = this._name;
     this._element.querySelector('.element__image').alt = this._name;
+    
+    if (this._cardOwnerId !== this._userId) {
+      this._element.querySelector('.element__trash').style.display = 'none';
+    }
     
     return this._element;
   }

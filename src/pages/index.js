@@ -19,12 +19,14 @@ const api = new Api({
 
 const user = new UserInfo(selectors)
 
-Promise.all([user.getUserInfo(api), api.getInitialCards()])
+Promise.all([api.getProfile(), api.getInitialCards()])
 .then(res => {
+user.setUserInfo(res[0])
+const userId = res[0]._id;
 const cardsList = new Section({
       items: res[1],
       renderer: (cardItem) => {
-        const card = new Card(cardItem, '.elements__template_type_card');
+        const card = new Card(cardItem, userId, '.elements__template_type_card');
         const cardElement = card.generate();
         cardsList.addItem(cardElement);
       },
