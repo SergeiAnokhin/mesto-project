@@ -6,7 +6,7 @@ import Section from '../components/Section1.js';
 import PopupWithImage from '../components/PopupWithImage1.js';
 import PopupWithForm from '../components/PopupWithForm1.js';
 import UserInfo from '../components/UserInfo1.js';
-import { cardListSection, selectors, buttonEditProfile } from '../components/utils/constants';
+import { cardListSection, selectors, buttonEditProfile, validationConfig } from '../components/utils/constants';
 import Popup from '../components/Popup1';
 
 const api = new Api({
@@ -31,7 +31,7 @@ const cardsList = new Section({
     },
     cardListSection); 
     cardsList.renderItems(); 
-    popupImage.open(res[1][0].link, res[1][0].name)
+    // popupImage.open(res[1][0].link, res[1][0].name)
 })
 .catch(err => {
     console.log('Ошибка получения данных с сервера', err.message);
@@ -60,3 +60,8 @@ buttonEditProfile.addEventListener('click', () => {
   popupProfile.open()
   popupProfile.setEventListeners()
 })
+
+
+const formValidation = new FormValidator(validationConfig, document.querySelector('[name="edit-profile"]'))
+formValidation.enableValidation()
+
