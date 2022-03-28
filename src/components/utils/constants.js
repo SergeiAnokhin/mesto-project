@@ -7,6 +7,8 @@ export const selectors = {
 }
 
 export const buttonEditProfile = document.querySelector('.profile__edit-button');
+export const buttonAddPlace = document.querySelector('.profile__add-button');
+export const buttonEditAvatar = document.querySelector(selectors.avatar);
 
 export const validationConfig = {
     formSelector: '.form',
@@ -17,4 +19,3 @@ export const validationConfig = {
     spanSelector: '.form__input-error'
 }
 
-export const buttonAddPlace = document.querySelector('.profile__add-button');

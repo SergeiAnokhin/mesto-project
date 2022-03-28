@@ -6,7 +6,9 @@ import Section from '../components/Section1.js';
 import PopupWithImage from '../components/PopupWithImage1.js';
 import PopupWithForm from '../components/PopupWithForm1.js';
 import UserInfo from '../components/UserInfo1.js';
-import { cardListSection, selectors, buttonEditProfile, validationConfig, buttonAddPlace } from '../components/utils/constants';
+import { 
+  cardListSection, selectors, buttonEditProfile, validationConfig, 
+  buttonAddPlace, buttonEditAvatar } from '../components/utils/constants';
 import Popup from '../components/Popup1';
 
 const api = new Api({
@@ -54,22 +56,7 @@ const popupProfile = new PopupWithForm({
 });
 
 const popupImage = new PopupWithImage({selector: '#popup_element-image'})
-
 popupImage.setEventListeners()
-
-//Валидация попапов
-const formValidationProfilePopup = new FormValidator(validationConfig, document.querySelector('[name="edit-profile"]'))
-const formValidationAddPlacePopup = new FormValidator(validationConfig, document.querySelector('[name="add-element"]'))
-
-// Открыть попап редактирвоания профиля
-buttonEditProfile.addEventListener('click', () => {
-  popupProfile._popup.querySelector('#profile-name').value = user.getUserInfo().name;
-  popupProfile._popup.querySelector('#profile-info').value = user.getUserInfo().info;
-  formValidationProfilePopup.clearErrors();
-  popupProfile.open()
-  popupProfile.setEventListeners();
-  formValidationProfilePopup.enableValidation();
-})
 
 // Создание попапа редактирования места
 const popupAddPlace = new PopupWithForm({
@@ -88,10 +75,48 @@ const popupAddPlace = new PopupWithForm({
   }
 });
 
+// Создание попапа редактирования аватара
+const popupEditAvatar = new PopupWithForm({
+  selector: '#popup_edit-avatar',
+  handleFormSubmit: (inputValues) => {
+    api.editAvatar(inputValues['avatar-link'])
+    .then (res => {
+      user.setUserInfo(res);
+      popupEditAvatar.close();
+    })
+    .catch(err => {
+      console.log('Ошибка изменения аватара', err.message);
+   })
+  }
+});
+
+//Валидация попапов
+const formValidationProfilePopup = new FormValidator(validationConfig, document.querySelector('[name="edit-profile"]'));
+const formValidationAddPlacePopup = new FormValidator(validationConfig, document.querySelector('[name="add-element"]'));
+const formValidationEditAvatarPopup = new FormValidator(validationConfig, document.querySelector('[name="edit-avatar"]'));
+
+// Открыть попап редактирвоания профиля
+buttonEditProfile.addEventListener('click', () => {
+  popupProfile._popup.querySelector('#profile-name').value = user.getUserInfo().name;
+  popupProfile._popup.querySelector('#profile-info').value = user.getUserInfo().info;
+  formValidationProfilePopup.clearErrors();
+  popupProfile.open()
+  popupProfile.setEventListeners();
+  formValidationProfilePopup.enableValidation();
+})
+
 //Открытие попапа добавления места
 buttonAddPlace.addEventListener('click', () => {
   formValidationAddPlacePopup.clearErrors();
   popupAddPlace.open();
   popupAddPlace.setEventListeners();
   formValidationAddPlacePopup.enableValidation();
+})
+
+//Открытие попапа редактирования аватара
+buttonEditAvatar.addEventListener('click', () => {
+  formValidationEditAvatarPopup.clearErrors();
+  popupEditAvatar.open();
+  popupEditAvatar.setEventListeners();
+  formValidationEditAvatarPopup.enableValidation();
 })
