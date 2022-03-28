@@ -1,10 +1,11 @@
 export default class Card {
-  constructor(data, userId, selector) {
+  constructor({data, userId, selector, handleCardClick}) {
     this._name = data.name;
     this._link = data.link;
     this._selector = selector;
     this._cardOwnerId = data.owner._id;
     this._userId = userId;
+    this._handleCardClick = handleCardClick;
   }
 
   _getElement() {
@@ -34,6 +35,9 @@ export default class Card {
   _setEventListeners() {
     this._element.querySelector('.element__like-button').addEventListener('click', () => {
       this._toggleLikeClick();
+    });
+    this._element.querySelector('.element__image').addEventListener('click', () => {
+      this._handleCardClick();
     });
   }  
 

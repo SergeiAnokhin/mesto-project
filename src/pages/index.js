@@ -23,12 +23,20 @@ const user = new UserInfo(selectors)
 
 Promise.all([api.getProfile(), api.getInitialCards()])
 .then(res => {
+  // console.log(res)
 user.setUserInfo(res[0])
 const userId = res[0]._id;
 const cardsList = new Section({
       items: res[1],
       renderer: (cardItem) => {
-        const card = new Card(cardItem, userId, '.elements__template_type_card');
+        const card = new Card({
+        data: cardItem, 
+        userId: userId, 
+        selector: '.elements__template_type_card',
+        handleCardClick: () => {
+          popupImage.open(cardItem.link, cardItem.name)
+        }}
+        );
         const cardElement = card.generate();
         cardsList.addItem(cardElement);
       },
@@ -64,7 +72,14 @@ const popupAddPlace = new PopupWithForm({
   handleFormSubmit: (inputValues) => {
     api.addCard(inputValues['place-name'], inputValues['image-link'])
     .then (res => {
-      const card = new Card(res, user.getUserInfo().userId, '.elements__template_type_card');
+      const card = new Card({
+        data: res, 
+        userId: user.getUserInfo().userId, 
+        selector: '.elements__template_type_card',
+        handleCardClick: () => {
+          popupImage.open(res.link, res.name)
+        }
+      });
       const cardElement = card.generate();
       document.querySelector(cardListSection).prepend(cardElement);
       popupAddPlace.close();
