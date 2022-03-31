@@ -1,11 +1,12 @@
 export default class Card {
-  constructor({data, userId, selector, handleCardClick}) {
+  constructor({data, userId, selector, handleCardClick, handleDeleteIconClick}) {
     this._name = data.name;
     this._link = data.link;
     this._selector = selector;
     this._cardOwnerId = data.owner._id;
     this._userId = userId;
     this._handleCardClick = handleCardClick;
+    this._handleDeleteIconClick = handleDeleteIconClick;
   }
 
   _getElement() {
@@ -38,6 +39,9 @@ export default class Card {
     });
     this._element.querySelector('.element__image').addEventListener('click', () => {
       this._handleCardClick();
+    });
+    this._element.querySelector('.element__trash').addEventListener('click', () => {
+      this._handleDeleteIconClick();
     });
   }  
 
