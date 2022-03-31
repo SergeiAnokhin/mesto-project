@@ -35,15 +35,23 @@ const cardsList = new Section({
         selector: '.elements__template_type_card',
         handleCardClick: () => {
           popupImage.open(cardItem.link, cardItem.name)
-        }}
-        );
+        },
+        handleDeleteIconClick: () => {
+          api.deleteCard(cardItem._id)
+          .then(res => {
+            cardElement.remove()
+          })
+          .catch(err => {
+            console.log('Ошибка удаления карточки', err.message);
+         })
+        }
+      });
         const cardElement = card.generate();
         cardsList.addItem(cardElement);
       },
     },
     cardListSection); 
-    cardsList.renderItems(); 
-    // popupImage.open(res[1][0].link, res[1][0].name)
+    cardsList.renderItems();
 })
 .catch(err => {
     console.log('Ошибка получения данных с сервера', err.message);
@@ -72,17 +80,32 @@ const popupAddPlace = new PopupWithForm({
   handleFormSubmit: (inputValues) => {
     api.addCard(inputValues['place-name'], inputValues['image-link'])
     .then (res => {
-      const card = new Card({
-        data: res, 
-        userId: user.getUserInfo().userId, 
-        selector: '.elements__template_type_card',
-        handleCardClick: () => {
-          popupImage.open(res.link, res.name)
-        }
-      });
-      const cardElement = card.generate();
-      document.querySelector(cardListSection).prepend(cardElement);
-      popupAddPlace.close();
+      const cardsList = new Section({
+        items: [res],
+        renderer: (cardItem) => {
+          const card = new Card({
+          data: cardItem, 
+          userId: res.owner._id, 
+          selector: '.elements__template_type_card',
+          handleCardClick: () => {
+            popupImage.open(cardItem.link, cardItem.name)
+          },
+          handleDeleteIconClick: () => {
+                api.deleteCard(res._id)
+                .then(res => {
+                  cardElement.remove()
+                })
+                .catch(err => {
+                  console.log('Ошибка удаления карточки', err.message);
+               })
+              }
+        });
+          const cardElement = card.generate();
+          cardsList.addItem(cardElement);
+        },
+      },
+      cardListSection); 
+      cardsList.renderItems(); 
     })
     .catch(err => {
       console.log('Ошибка добавления карточки', err.message);
