@@ -1,87 +1,57 @@
-import { addLike, deleteCard, deleteLike } from './api.js';
-import { modal } from './modal.js'
-import { openPopup } from './utils.js';
-
-export const elements = document.querySelector('.elements');
-export const templateElement = document.querySelector('.elements__template').content;
-
-// Функция создания карточки места
-export const createCard = (cardObj, userId) => {
-    const cardId = cardObj._id;
-    const card = templateElement.querySelector('.element').cloneNode(true);
-    const cardImage = card.querySelector('.element__image');
-    const cardTitle = card.querySelector('.element__title');
-    const cardTrashBtn = card.querySelector('.element__trash');
-
-    cardImage.src = cardObj.link;
-    cardImage.alt = cardObj.name;
-    cardTitle.textContent = cardObj.name;
-
-    if (cardObj.owner._id !== userId) {
-      cardTrashBtn.style.display = 'none';
-    }
-  
-    cardTrashBtn.addEventListener('click', () => {
-      deleteCard(cardId)
-      .then(() => {
-        card.remove();
-      })
-      .catch((err) => {
-        console.log(err);
-      }); 
-    });
-  
-    const elementLike = card.querySelector('.element__like-button');
-    const elementLikeCount = card.querySelector('.element__like-count');
-
-    elementLikeCount.textContent = cardObj.likes.length;
-
-    cardObj.likes.forEach(item => {
-      if (item._id === userId) {
-        elementLike.classList.add('element__like-button_active');
-      }
-    })
-
-      elementLike.addEventListener('click', () => {
-        if (elementLike.classList.contains('element__like-button_active')) {
-          deleteLike(cardId)
-          .then((result) => {
-            elementLike.classList.remove('element__like-button_active');
-            elementLikeCount.textContent = result.likes.length;
-          })
-          .catch((err) => {
-            console.log(err);
-          }); 
-        } else {
-          addLike(cardId)
-          .then((result) => {
-            elementLike.classList.add('element__like-button_active');
-            elementLikeCount.textContent = result.likes.length;
-          })
-          .catch((err) => {
-            console.log(err);
-          }); 
-        }
-    });
-  
-    cardImage.addEventListener('click', () => {
-      modal.popupImage.src = cardObj.link;
-      modal.popupImage.alt = cardObj.name;
-      modal.popupPlaceName.textContent = cardObj.name;
-      openPopup(modal.imgPopup);
-    });
-  
-    return card;
+export default class Card {
+  constructor({data, userId, selector, handleCardClick, handleDeleteIconClick, handleLikeClick}) {
+    this._name = data.name;
+    this._link = data.link;
+    this._selector = selector;
+    this._cardOwnerId = data.owner._id;
+    this._userId = userId;
+    this._handleCardClick = handleCardClick;
+    this._handleDeleteIconClick = handleDeleteIconClick;
+    this._data = data;
+    this._data.likes = data.likes;
+    this._handleLikeClick = handleLikeClick;
   }
 
-export const addElements = (arrCards, userId) => {
-    arrCards.forEach((cardObj) => {
-      const cardElement = createCard(cardObj, userId);
-      elements.append(cardElement);
+  _getElement() {
+    const cardElement = document
+    .querySelector(this._selector)
+    .content
+    .querySelector('.element')
+    .cloneNode(true);
+    
+    return cardElement;
+  }
+  
+  generate() {
+    this._element = this._getElement();
+    this._setEventListeners();
+    this._element.querySelector('.element__image').src = this._link;
+    this._element.querySelector('.element__title').textContent = this._name;
+    this._element.querySelector('.element__image').alt = this._name;
+    this._element.querySelector('.element__like-count').textContent = this._data.likes.length;
+    
+    if(this._cardOwnerId !== this._userId) {
+      this._element.querySelector('.element__trash').style.display = 'none';
+    }
+    
+    if(this._data.likes.some((like) => this._userId === like._id)) {
+      this._element.querySelector('.element__like-button').classList.add('element__like-button_active');
+    }
+
+    return this._element;
+  }
+
+  _setEventListeners() {
+    this._element.querySelector('.element__like-button').addEventListener('click', () => {
+      this._handleLikeClick();
     });
+    this._element.querySelector('.element__image').addEventListener('click', () => {
+      this._handleCardClick();
+    });
+    this._element.querySelector('.element__trash').addEventListener('click', () => {
+      this._handleDeleteIconClick();
+    });
+  }  
 }
 
-export const addElement = (cardObj, userId) => {
-      const cardElement = createCard(cardObj, userId);
-      elements.prepend(cardElement);
-}
+
