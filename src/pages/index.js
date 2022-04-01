@@ -1,11 +1,11 @@
 import '../pages/index.css';
-import Api from '../components/Api1.js';
-import Card from '../components/Card1.js';
-import FormValidator from '../components/FormValidator1.js';
-import Section from '../components/Section1.js';
-import PopupWithImage from '../components/PopupWithImage1.js';
-import PopupWithForm from '../components/PopupWithForm1.js';
-import UserInfo from '../components/UserInfo1.js';
+import Api from '../components/Api.js';
+import Card from '../components/Card.js';
+import FormValidator from '../components/FormValidator.js';
+import Section from '../components/Section.js';
+import PopupWithImage from '../components/PopupWithImage.js';
+import PopupWithForm from '../components/PopupWithForm.js';
+import UserInfo from '../components/UserInfo.js';
 import { 
   cardListSection, selectors, buttonEditProfile, validationConfig, 
   buttonAddPlace, buttonEditAvatar, buttonTextSave, buttonTextCreate } from '../components/utils/constants';
