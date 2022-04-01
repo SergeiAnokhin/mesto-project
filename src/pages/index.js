@@ -20,6 +20,7 @@ const api = new Api({
 
 const user = new UserInfo(selectors)
 
+// Получение данных пользователя и карточек
 Promise.all([api.getProfile(), api.getInitialCards()])
 .then(res => {
 user.setUserInfo(res[0])
