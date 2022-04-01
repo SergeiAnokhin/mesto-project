@@ -8,7 +8,7 @@ import PopupWithForm from '../components/PopupWithForm1.js';
 import UserInfo from '../components/UserInfo1.js';
 import { 
   cardListSection, selectors, buttonEditProfile, validationConfig, 
-  buttonAddPlace, buttonEditAvatar } from '../components/utils/constants';
+  buttonAddPlace, buttonEditAvatar, buttonTextSave, buttonTextCreate } from '../components/utils/constants';
 
 const api = new Api({
   baseUrl: 'https://nomoreparties.co/v1/plus-cohort7',
@@ -81,6 +81,7 @@ const cardsList = new Section({
 const popupProfile = new PopupWithForm({
   selector: '#popup_edit-profile',
   handleFormSubmit: (inputValues) => {
+    popupProfile.renderSave(buttonTextSave, true);
     api.editProfile(inputValues['profile-name'], inputValues['profile-info'])
     .then (res => {
       user.setUserInfo(res)
@@ -89,6 +90,7 @@ const popupProfile = new PopupWithForm({
     .catch(err => {
       console.log('Ошибка редактирования профиля', err.message);
    })
+   .finally(() => popupProfile.renderSave(buttonTextSave, false))
   }
 });
 
@@ -99,6 +101,7 @@ popupImage.setEventListeners()
 const popupAddPlace = new PopupWithForm({
   selector: '#popup_add-element',
   handleFormSubmit: (inputValues) => {
+    popupAddPlace.renderSave(buttonTextCreate, true);
     api.addCard(inputValues['place-name'], inputValues['image-link'])
     .then (res => {
       const cardsList = new Section({
@@ -154,6 +157,7 @@ const popupAddPlace = new PopupWithForm({
     .catch(err => {
       console.log('Ошибка добавления карточки', err.message);
    })
+   .finally(() => popupAddPlace.renderSave(buttonTextCreate, false))
   }
 });
 
@@ -161,6 +165,7 @@ const popupAddPlace = new PopupWithForm({
 const popupEditAvatar = new PopupWithForm({
   selector: '#popup_edit-avatar',
   handleFormSubmit: (inputValues) => {
+    popupEditAvatar.renderSave(buttonTextSave, true);
     api.editAvatar(inputValues['avatar-link'])
     .then (res => {
       user.setUserInfo(res);
@@ -169,6 +174,7 @@ const popupEditAvatar = new PopupWithForm({
     .catch(err => {
       console.log('Ошибка изменения аватара', err.message);
    })
+   .finally(() => popupEditAvatar.renderSave(buttonTextSave, false))
   }
 });
 

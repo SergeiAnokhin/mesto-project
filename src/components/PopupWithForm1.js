@@ -35,4 +35,13 @@ export default class PopupWithForm extends Popup {
         super.close()
         this._form.reset();
     }
+
+    renderSave = (buttonText, isSave) => {
+        const button = this._popup.querySelector('.form__button');
+        if (isSave) {
+          button.textContent = buttonText.doing
+        } else {
+          button.textContent = buttonText.do
+        }
+    }
 }

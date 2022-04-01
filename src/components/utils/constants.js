@@ -19,3 +19,13 @@ export const validationConfig = {
     spanSelector: '.form__input-error'
 }
 
+export const buttonTextSave = {
+    do : 'Сохранить',
+    doing : 'Сохранение...'
+  }
+  
+export const buttonTextCreate = {
+    do : 'Cоздать',
+    doing : 'Создание...'
+}
+
