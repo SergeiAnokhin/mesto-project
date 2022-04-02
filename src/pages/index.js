@@ -79,6 +79,7 @@ const cardsList = new Section({
     console.log('Ошибка получения данных с сервера', err.message);
 })
 
+//Создание попапа профиля
 const popupProfile = new PopupWithForm({
   selector: '#popup_edit-profile',
   handleFormSubmit: (inputValues) => {
