@@ -10,6 +10,7 @@ import {
   cardListSection, selectors, buttonEditProfile, validationConfig, 
   buttonAddPlace, buttonEditAvatar, buttonTextSave, buttonTextCreate } from '../components/utils/constants';
 
+// Создание экземпляра класса Api
 const api = new Api({
   baseUrl: 'https://nomoreparties.co/v1/plus-cohort7',
   headers: {
@@ -18,6 +19,7 @@ const api = new Api({
   }
 }); 
 
+// Создание экземпляра класса User
 const user = new UserInfo(selectors)
 
 // Получение данных пользователя и карточек
@@ -85,7 +87,7 @@ Promise.all([api.getProfile(), api.getInitialCards()])
     console.log('Ошибка получения данных с сервера', err.message);
 })
 
-//Создание попапа профиля
+//Создание модального окна профиля пользователя
 const popupProfile = new PopupWithForm({
   selector: '#popup_edit-profile',
   handleFormSubmit: (inputValues) => {
@@ -102,10 +104,11 @@ const popupProfile = new PopupWithForm({
   }
 });
 
+// Создание модального окна с картинкой
 const popupImage = new PopupWithImage({selector: '#popup_element-image'})
 popupImage.setEventListeners()
 
-// Создание попапа редактирования места
+// Создание модального окна добавления карточки места
 const popupAddPlace = new PopupWithForm({
   selector: '#popup_add-element',
   handleFormSubmit: (inputValues) => {
@@ -175,7 +178,7 @@ const popupAddPlace = new PopupWithForm({
   }
 });
 
-// Создание попапа редактирования аватара
+// Создание модального окна редактирования аватара пользователя
 const popupEditAvatar = new PopupWithForm({
   selector: '#popup_edit-avatar',
   handleFormSubmit: (inputValues) => {
@@ -192,12 +195,12 @@ const popupEditAvatar = new PopupWithForm({
   }
 });
 
-//Валидация попапов
+//Валидация форм в модальном окне
 const formValidationProfilePopup = new FormValidator(validationConfig, document.querySelector('[name="edit-profile"]'));
 const formValidationAddPlacePopup = new FormValidator(validationConfig, document.querySelector('[name="add-element"]'));
 const formValidationEditAvatarPopup = new FormValidator(validationConfig, document.querySelector('[name="edit-avatar"]'));
 
-// Открыть попап редактирвоания профиля
+// Открытие модального окна редактирвоания профиля пользователя
 buttonEditProfile.addEventListener('click', () => {
   popupProfile._popup.querySelector('#profile-name').value = user.getUserInfo().name;
   popupProfile._popup.querySelector('#profile-info').value = user.getUserInfo().info;
@@ -207,7 +210,7 @@ buttonEditProfile.addEventListener('click', () => {
   formValidationProfilePopup.enableValidation();
 })
 
-//Открытие попапа добавления места
+//Открытие модального окна добавления карточки места
 buttonAddPlace.addEventListener('click', () => {
   formValidationAddPlacePopup.clearErrors();
   popupAddPlace.open();
@@ -215,7 +218,7 @@ buttonAddPlace.addEventListener('click', () => {
   formValidationAddPlacePopup.enableValidation();
 })
 
-//Открытие попапа редактирования аватара
+//Открытие модального окна редактирования аватара пользователя
 buttonEditAvatar.addEventListener('click', () => {
   formValidationEditAvatarPopup.clearErrors();
   popupEditAvatar.open();
