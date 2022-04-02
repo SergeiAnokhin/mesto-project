@@ -23,55 +23,61 @@ const user = new UserInfo(selectors)
 // Получение данных пользователя и карточек
 Promise.all([api.getProfile(), api.getInitialCards()])
 .then(res => {
-user.setUserInfo(res[0])
-const userId = res[0]._id;
-const cardsList = new Section({
-      items: res[1],
-      renderer: (cardItem) => {
-        const card = new Card({
-        data: cardItem, 
-        userId: userId, 
-        selector: '.elements__template_type_card',
-        handleCardClick: () => {
-          popupImage.open(cardItem.link, cardItem.name)
-        },
-        handleDeleteIconClick: () => {
-          api.deleteCard(cardItem._id)
+  user.setUserInfo(res[0])
+  const userId = res[0]._id;
+
+  const cardsList = new Section({
+    items: res[1],
+    renderer: (cardItem) => {
+      const card = new Card({
+      data: cardItem, 
+      userId: userId, 
+      selector: '.elements__template_type_card',
+      handleCardClick: () => {
+        popupImage.open(cardItem.link, cardItem.name)
+      },
+      handleDeleteIconClick: () => {
+        api.deleteCard(cardItem._id)
+        .then(res => {
+          cardElement.remove()
+        })
+        .catch(err => {
+          console.log('Ошибка удаления карточки', err.message);
+       })
+      },
+      handleLikeClick: () => {
+        const likeButton = cardElement.querySelector('.element__like-button');
+        const likeCounter = cardElement.querySelector('.element__like-count');
+  
+        if(!likeButton.classList.contains('element__like-button_active')) {
+          api.addLike(cardItem._id)
           .then(res => {
-            cardElement.remove()
+            likeButton.classList.add('element__like-button_active');
+            likeCounter.textContent = res.likes.length;
           })
           .catch(err => {
-            console.log('Ошибка удаления карточки', err.message);
-         })
-        },
-        handleLikeClick: () => {
-          const likeButton = cardElement.querySelector('.element__like-button');
-          const likeCounter = cardElement.querySelector('.element__like-count');
-          if(!likeButton.classList.contains('element__like-button_active')) {
-            api.addLike(cardItem._id)
-            .then(res => {
-              likeButton.classList.add('element__like-button_active');
-              likeCounter.textContent = res.likes.length;
-            })
-            .catch(err => {
-              console.log('Ошибка проствления лайка', err.message);
-            })
-          } else {
-            api.deleteLike(cardItem._id)
-            .then(res => {
-              likeButton.classList.remove('element__like-button_active');
-              likeCounter.textContent = res.likes.length;
-            })
-            .catch(err => {
-              console.log('Ошибка удаления лайка', err.message);
-            })
-          }
+            console.log('Ошибка проствления лайка', err.message);
+          })
+        } else {
+          api.deleteLike(cardItem._id)
+          .then(res => {
+            likeButton.classList.remove('element__like-button_active');
+            likeCounter.textContent = res.likes.length;
+          })
+          .catch(err => {
+            console.log('Ошибка удаления лайка', err.message);
+          })
         }
+  
+      }
       });
-        const cardElement = card.generate();
-        cardsList.addItems(cardElement);
-      },
+  
+      const cardElement = card.generate();
+      cardsList.addItems(cardElement);
+  
     },
+  },
+
     cardListSection); 
     cardsList.renderItems();
 })
@@ -104,6 +110,7 @@ const popupAddPlace = new PopupWithForm({
   selector: '#popup_add-element',
   handleFormSubmit: (inputValues) => {
     popupAddPlace.renderSave(buttonTextCreate, true);
+
     api.addCard(inputValues['place-name'], inputValues['image-link'])
     .then (res => {
       const cardsList = new Section({
@@ -113,9 +120,11 @@ const popupAddPlace = new PopupWithForm({
           data: cardItem, 
           userId: res.owner._id, 
           selector: '.elements__template_type_card',
+
           handleCardClick: () => {
             popupImage.open(cardItem.link, cardItem.name)
           },
+
           handleDeleteIconClick: () => {
             api.deleteCard(res._id)
             .then(res => {
@@ -125,9 +134,11 @@ const popupAddPlace = new PopupWithForm({
               console.log('Ошибка удаления карточки', err.message);
             })
           },
+
           handleLikeClick: () => {
             const likeButton = cardElement.querySelector('.element__like-button');
             const likeCounter = cardElement.querySelector('.element__like-count');
+
             if(!likeButton.classList.contains('element__like-button_active')) {
               api.addLike(cardItem._id)
               .then(res => {
@@ -147,6 +158,7 @@ const popupAddPlace = new PopupWithForm({
                 console.log('Ошибка удаления лайка', err.message);
               })
             }
+
           }
         });
           const cardElement = card.generate();
@@ -158,7 +170,7 @@ const popupAddPlace = new PopupWithForm({
     })
     .catch(err => {
       console.log('Ошибка добавления карточки', err.message);
-   })
+    })
    .finally(() => popupAddPlace.renderSave(buttonTextCreate, false))
   }
 });
@@ -175,7 +187,7 @@ const popupEditAvatar = new PopupWithForm({
     })
     .catch(err => {
       console.log('Ошибка изменения аватара', err.message);
-   })
+    })
    .finally(() => popupEditAvatar.renderSave(buttonTextSave, false))
   }
 });
