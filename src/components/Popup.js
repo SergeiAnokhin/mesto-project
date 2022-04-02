@@ -11,7 +11,7 @@ export default class Popup {
         setTimeout(() => {
             this._popup.tabIndex = 1;
             this._popup.focus()
-          }, 50)
+        }, 50)
     }
 
     close() {
