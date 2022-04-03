@@ -1,25 +1,27 @@
 export default class Popup {
     constructor({selector}) {
-        this._popup = document.querySelector(selector);
+        this.popup = document.querySelector(selector);
         this._handleEscClose = this._handleEscClose.bind(this);
         this._handleOverlayClose = this._handleOverlayClose.bind(this); 
-        this. _handleBtnClose = this. _handleBtnClose.bind(this);
+        this._handleBtnClose = this._handleBtnClose.bind(this);
     }
 
     open() {
-        this._popup.classList.add('popup_opened');
+        this.popup.classList.add('popup_opened');
+        this.popup.addEventListener('keydown', this._handleEscClose);
         setTimeout(() => {
-            this._popup.tabIndex = 1;
-            this._popup.focus()
+            this.popup.tabIndex = 1;
+            this.popup.focus()
         }, 50)
     }
 
     close() {
-        this._popup.classList.remove('popup_opened');
+        this.popup.classList.remove('popup_opened');
+        this.popup.removeEventListener('keydown', this._handleEscClose);
     }
 
     _handleEscClose(evt) {
-        if (evt.key === 'Escape' && this._popup.classList.contains('popup_opened')) {
+        if (evt.key === 'Escape') {
             this.close()
         }
     }
@@ -37,8 +39,7 @@ export default class Popup {
     }
 
     setEventListeners() {
-        this._popup.addEventListener('keydown', this._handleEscClose);
-        this._popup.addEventListener('click', this._handleOverlayClose);
-        this._popup.addEventListener('click', this. _handleBtnClose);
+        this.popup.addEventListener('mousedown', this._handleOverlayClose);
+        this.popup.addEventListener('click', this. _handleBtnClose);
     }
 }
