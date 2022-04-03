@@ -16,10 +16,6 @@ export default class Api {
         headers: this._headers
       })
       .then(res => this._checkResponse(res))
-      .catch((err) => {
-        console.log(err);
-        return Promise.reject(err);
-      });
     }
   
     getInitialCards() {
@@ -27,10 +23,6 @@ export default class Api {
         headers: this._headers
       })
       .then(res => this._checkResponse(res))
-      .catch((err) => {
-        console.log(err);
-        return Promise.reject(err);
-      });
     }
   
     editProfile(name, about) {
@@ -43,10 +35,6 @@ export default class Api {
         })
       })
       .then(res => this._checkResponse(res))
-      .catch((err) => {
-        console.log(err);
-        return Promise.reject(err);
-      });
     }
   
     editAvatar(avatarLink) {
@@ -58,10 +46,6 @@ export default class Api {
         })
       })
       .then(res => this._checkResponse(res))
-      .catch((err) => {
-        console.log(err);
-        return Promise.reject(err);
-      });
     }
   
     addCard(name, link) {
@@ -74,10 +58,6 @@ export default class Api {
         })
       })
       .then(res => this._checkResponse(res))
-      .catch((err) => {
-        console.log(err);
-        return Promise.reject(err);
-      });
     }
   
     deleteCard(cardId) {
@@ -86,10 +66,6 @@ export default class Api {
         headers: this._headers,
       })
       .then(res => this._checkResponse(res))
-      .catch((err) => {
-        console.log(err);
-        return Promise.reject(err);
-      });
     }
     
     addLike(cardId) {
@@ -98,10 +74,6 @@ export default class Api {
         headers: this._headers,
       })
       .then(res => this._checkResponse(res))
-      .catch((err) => {
-        console.log(err);
-        return Promise.reject(err);
-      });
     }
   
     deleteLike(cardId) {
@@ -110,9 +82,5 @@ export default class Api {
         headers: this._headers,
       })
       .then(res => this._checkResponse(res))
-      .catch((err) => {
-        console.log(err);
-        return Promise.reject(err);
-      });
     }
   }

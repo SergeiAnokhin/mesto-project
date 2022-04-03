@@ -8,7 +8,7 @@ import PopupWithForm from '../components/PopupWithForm.js';
 import UserInfo from '../components/UserInfo.js';
 import { 
   cardListSection, selectors, buttonEditProfile, validationConfig, 
-  buttonAddPlace, buttonEditAvatar, buttonTextSave, buttonTextCreate } from '../components/utils/constants';
+  buttonAddPlace, buttonEditAvatar, buttonTextSave, buttonTextCreate } from '../utils/constants.js';
 
 // Создание экземпляра класса Api
 const api = new Api({

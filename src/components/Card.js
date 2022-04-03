@@ -24,31 +24,39 @@ export default class Card {
   
   generate() {
     this._element = this._getElement();
+    
+    this._cardImage = this._element.querySelector('.element__image');
+    this._cardTitle = this._element.querySelector('.element__title');
+    this._cardLikeCount = this._element.querySelector('.element__like-count');
+    this._cardLikeButton = this._element.querySelector('.element__like-button');
+    this._cardTrashButton = this._element.querySelector('.element__trash');
+
     this._setEventListeners();
-    this._element.querySelector('.element__image').src = this._link;
-    this._element.querySelector('.element__title').textContent = this._name;
-    this._element.querySelector('.element__image').alt = this._name;
-    this._element.querySelector('.element__like-count').textContent = this._data.likes.length;
+
+    this._cardImage.src = this._link;
+    this._cardTitle.textContent = this._name;
+    this._cardImage.alt = this._name;
+    this._cardLikeCount.textContent = this._data.likes.length;
     
     if(this._cardOwnerId !== this._userId) {
-      this._element.querySelector('.element__trash').style.display = 'none';
+      this._cardTrashButton.style.display = 'none';
     }
     
     if(this._data.likes.some((like) => this._userId === like._id)) {
-      this._element.querySelector('.element__like-button').classList.add('element__like-button_active');
+      this._cardLikeButton.classList.add('element__like-button_active');
     }
 
     return this._element;
   }
 
   _setEventListeners() {
-    this._element.querySelector('.element__like-button').addEventListener('click', () => {
+    this._cardLikeButton.addEventListener('click', () => {
       this._handleLikeClick();
     });
-    this._element.querySelector('.element__image').addEventListener('click', () => {
+    this._cardImage.addEventListener('click', () => {
       this._handleCardClick();
     });
-    this._element.querySelector('.element__trash').addEventListener('click', () => {
+    this._cardTrashButton.addEventListener('click', () => {
       this._handleDeleteIconClick();
     });
   }  
