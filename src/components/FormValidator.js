@@ -5,7 +5,6 @@ export default class FormValidator {
     this._submitButtonSelector = config.submitButtonSelector;
     this._inputErrorClass = config.inputErrorClass;
     this._errorClass = config.errorClass;
-    this._forms = document.forms;
     this._formElement = formElement;
     this._inputList = Array.from(this._formElement.querySelectorAll(this._inputSelector));
     this._buttonElement = this._formElement.querySelector(this._submitButtonSelector);
@@ -15,15 +14,14 @@ export default class FormValidator {
   clearErrors() {
     this._inputList.forEach(input => {
         if (input.classList.contains(this._inputErrorClass)) {
-            input.classList.remove(this._inputErrorClass);
+          this._hideInputError(input);
         }
     })
     this._errorList.forEach(input => {
         if (input.classList.contains(this._errorClass)) {
-            input.classList.remove(this._errorClass);
+          this._hideInputError(input);
         }
     })
-    this._hasInvalidInput();
     this._toggleButtonState();
 }
 
