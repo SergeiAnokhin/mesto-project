@@ -31,53 +31,12 @@ Promise.all([api.getProfile(), api.getInitialCards()])
   const cardsList = new Section({
     items: cards,
     renderer: (cardItem) => {
-      const card = new Card({
-      data: cardItem, 
-      userId: userId, 
-      selector: '.elements__template_type_card',
-      handleCardClick: () => {
-        popupImage.open(cardItem.link, cardItem.name)
-      },
-
-      handleDeleteIconClick: (card) => {
-        removeCard(card);
-      },
-
-      handleLikeClick: () => {
-        const likeButton = cardElement.querySelector('.element__like-button');
-        const likeCounter = cardElement.querySelector('.element__like-count');
-  
-        if(!likeButton.classList.contains('element__like-button_active')) {
-          api.addLike(cardItem._id)
-          .then(res => {
-            likeButton.classList.add('element__like-button_active');
-            likeCounter.textContent = res.likes.length;
-          })
-          .catch(err => {
-            console.log('Ошибка проствления лайка', err.message);
-          })
-        } else {
-          api.deleteLike(cardItem._id)
-          .then(res => {
-            likeButton.classList.remove('element__like-button_active');
-            likeCounter.textContent = res.likes.length;
-          })
-          .catch(err => {
-            console.log('Ошибка удаления лайка', err.message);
-          })
-        }
-  
-      }
-      });
-  
-      const cardElement = card.generate();
-      cardsList.addItems(cardElement);
-  
+      cardsList.addItems(createCard(cardItem, userData));
     },
   },
+  cardListSection); 
 
-    cardListSection); 
-    cardsList.renderItems();
+  cardsList.renderItems();
 })
 .catch(err => {
     console.log('Ошибка получения данных с сервера', err.message);
@@ -116,47 +75,7 @@ const popupAddPlace = new PopupWithForm({
       const cardsList = new Section({
         items: [res],
         renderer: (cardItem) => {
-          const card = new Card({
-          data: cardItem, 
-          userId: res.owner._id, 
-          selector: '.elements__template_type_card',
-
-          handleCardClick: () => {
-            popupImage.open(cardItem.link, cardItem.name)
-          },
-
-          handleDeleteIconClick: (card) => {
-            removeCard(card);
-          },
-
-          handleLikeClick: () => {
-            const likeButton = cardElement.querySelector('.element__like-button');
-            const likeCounter = cardElement.querySelector('.element__like-count');
-
-            if(!likeButton.classList.contains('element__like-button_active')) {
-              api.addLike(cardItem._id)
-              .then(res => {
-                likeButton.classList.add('element__like-button_active');
-                likeCounter.textContent = res.likes.length;
-              })
-              .catch(err => {
-                console.log('Ошибка проствления лайка', err.message);
-              })
-            } else {
-              api.deleteLike(cardItem._id)
-              .then(res => {
-                likeButton.classList.remove('element__like-button_active');
-                likeCounter.textContent = res.likes.length;
-              })
-              .catch(err => {
-                console.log('Ошибка удаления лайка', err.message);
-              })
-            }
-
-          }
-        });
-          const cardElement = card.generate();
-          cardsList.prependItem(cardElement);
+          cardsList.prependItem(createCard(cardItem, res.owner));
         },
       },
       cardListSection); 
@@ -227,4 +146,50 @@ function removeCard(card) {
   .catch((err) => {
     console.log('Ошибка удаления карточки', err.message);
   });
+}
+
+function createCard(cardItem, userData) {
+  const card = new Card({
+    data: cardItem, 
+    userId: userData._id, 
+    selector: '.elements__template_type_card',
+
+    handleCardClick: () => {
+      popupImage.open(cardItem.link, cardItem.name)
+    },
+
+    handleDeleteIconClick: (card) => {
+      removeCard(card);
+    },
+
+    handleLikeClick: () => {
+      const likeButton = cardElement.querySelector('.element__like-button');
+      const likeCounter = cardElement.querySelector('.element__like-count');
+
+      if(!likeButton.classList.contains('element__like-button_active')) {
+        api.addLike(cardItem._id)
+        .then(res => {
+          likeButton.classList.add('element__like-button_active');
+          likeCounter.textContent = res.likes.length;
+        })
+        .catch(err => {
+          console.log('Ошибка проствления лайка', err.message);
+        })
+      } else {
+        api.deleteLike(cardItem._id)
+        .then(res => {
+          likeButton.classList.remove('element__like-button_active');
+          likeCounter.textContent = res.likes.length;
+        })
+        .catch(err => {
+          console.log('Ошибка удаления лайка', err.message);
+        })
+      }
+
+    }
+  });
+
+  const cardElement = card.generate();
+
+  return cardElement;
 }
