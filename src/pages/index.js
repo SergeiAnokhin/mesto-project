@@ -38,15 +38,11 @@ Promise.all([api.getProfile(), api.getInitialCards()])
       handleCardClick: () => {
         popupImage.open(cardItem.link, cardItem.name)
       },
-      handleDeleteIconClick: () => {
-        api.deleteCard(cardItem._id)
-        .then(res => {
-          cardElement.remove()
-        })
-        .catch(err => {
-          console.log('Ошибка удаления карточки', err.message);
-       })
+
+      handleDeleteIconClick: (card) => {
+        removeCard(card);
       },
+
       handleLikeClick: () => {
         const likeButton = cardElement.querySelector('.element__like-button');
         const likeCounter = cardElement.querySelector('.element__like-count');
@@ -129,14 +125,8 @@ const popupAddPlace = new PopupWithForm({
             popupImage.open(cardItem.link, cardItem.name)
           },
 
-          handleDeleteIconClick: () => {
-            api.deleteCard(res._id)
-            .then(res => {
-              cardElement.remove()
-            })
-            .catch(err => {
-              console.log('Ошибка удаления карточки', err.message);
-            })
+          handleDeleteIconClick: (card) => {
+            removeCard(card);
           },
 
           handleLikeClick: () => {
@@ -227,3 +217,14 @@ buttonEditAvatar.addEventListener('click', () => {
   formValidationEditAvatarPopup.clearErrors();
   popupEditAvatar.open();
 })
+
+//Функция удаления карточки
+function removeCard(card) {
+  api.deleteCard(card.getId())
+  .then(() => {
+    card.deleteElement();
+  })
+  .catch((err) => {
+    console.log('Ошибка удаления карточки', err.message);
+  });
+}
