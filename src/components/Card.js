@@ -10,6 +10,16 @@ export default class Card {
     this._data = data;
     this._data.likes = data.likes;
     this._handleLikeClick = handleLikeClick;
+    this._cardId = data._id;
+  }
+
+  getId() {
+    return this._cardId;
+  }
+
+  deleteElement() {
+    this._element.remove();
+    this._element = null;
   }
 
   _getElement() {
@@ -57,7 +67,7 @@ export default class Card {
       this._handleCardClick();
     });
     this._cardTrashButton.addEventListener('click', () => {
-      this._handleDeleteIconClick();
+      this._handleDeleteIconClick(this);
     });
   }  
 }
