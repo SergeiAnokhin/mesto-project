@@ -121,19 +121,19 @@ buttonEditProfile.addEventListener('click', () => {
   const userData = user.getUserInfo();
   popupProfile.popup.querySelector('#profile-name').value = userData.name;
   popupProfile.popup.querySelector('#profile-info').value = userData.info;
-  formValidationProfilePopup.clearErrors();
+  formValidationProfilePopup.resetValidation();
   popupProfile.open()
 })
 
 //Открытие модального окна добавления карточки места
 buttonAddPlace.addEventListener('click', () => {
-  formValidationAddPlacePopup.clearErrors();
+  formValidationAddPlacePopup.resetValidation();
   popupAddPlace.open();
 })
 
 //Открытие модального окна редактирования аватара пользователя
 buttonEditAvatar.addEventListener('click', () => {
-  formValidationEditAvatarPopup.clearErrors();
+  formValidationEditAvatarPopup.resetValidation();
   popupEditAvatar.open();
 })
 
