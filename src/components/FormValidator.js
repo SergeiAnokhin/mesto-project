@@ -11,19 +11,12 @@ export default class FormValidator {
     this._errorList = Array.from(this._formElement.querySelectorAll(config.spanSelector));
   }
 
-  clearErrors() {
-    this._inputList.forEach(input => {
-        if (input.classList.contains(this._inputErrorClass)) {
-          this._hideInputError(input);
-        }
-    })
-    this._errorList.forEach(input => {
-        if (input.classList.contains(this._errorClass)) {
-          this._hideInputError(input);
-        }
-    })
+  resetValidation() {
     this._toggleButtonState();
-}
+    this._inputList.forEach((inputElement) => {
+      this._hideInputError(inputElement)
+    });
+  }
 
   _showInputError(inputElement, errorMessage) {
     const errorElement =  this._formElement.querySelector(`.${inputElement.id}-error`);
