@@ -22,21 +22,19 @@ const api = new Api({
 // Создание экземпляра класса User
 const user = new UserInfo(selectors)
 
+// Создание экземпляра класса Section
+const cardsList = new Section({
+  renderer: (cardItem, userData) => {
+    cardsList.prependItem(createCard(cardItem, userData));
+  },
+},
+cardListSection);
+
 // Получение данных пользователя и карточек
 Promise.all([api.getProfile(), api.getInitialCards()])
 .then(([userData, cards]) => {
   user.setUserInfo(userData)
-  const userId = userData._id;
-
-  const cardsList = new Section({
-    items: cards,
-    renderer: (cardItem) => {
-      cardsList.addItems(createCard(cardItem, userData));
-    },
-  },
-  cardListSection); 
-
-  cardsList.renderItems();
+  cardsList.renderItems(cards, userData);
 })
 .catch(err => {
     console.log('Ошибка получения данных с сервера', err.message);
@@ -72,14 +70,7 @@ const popupAddPlace = new PopupWithForm({
 
     api.addCard(inputValues['place-name'], inputValues['image-link'])
     .then (res => {
-      const cardsList = new Section({
-        items: [res],
-        renderer: (cardItem) => {
-          cardsList.prependItem(createCard(cardItem, res.owner));
-        },
-      },
-      cardListSection); 
-      cardsList.renderItems();
+      cardsList.renderItems([res], res.owner);
       popupAddPlace.close();
     })
     .catch(err => {
@@ -148,6 +139,7 @@ function removeCard(card) {
   });
 }
 
+// Функция создание карточки
 function createCard(cardItem, userData) {
   const card = new Card({
     data: cardItem, 
