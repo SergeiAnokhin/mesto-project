@@ -105,7 +105,7 @@ formValidationProfilePopup.enableValidation();
 const formValidationAddPlacePopup = new FormValidator(validationConfig, document.querySelector('[name="add-element"]'));
 formValidationAddPlacePopup.enableValidation();
 const formValidationEditAvatarPopup = new FormValidator(validationConfig, document.querySelector('[name="edit-avatar"]'));
-formValidationAddPlacePopup.enableValidation();
+formValidationEditAvatarPopup.enableValidation();
 
 // Открытие модального окна редактирвоания профиля пользователя
 buttonEditProfile.addEventListener('click', () => {
