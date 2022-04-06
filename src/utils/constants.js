@@ -29,3 +29,9 @@ export const buttonTextCreate = {
     doing : 'Создание...'
 }
 
+export const inputProfileName = document.querySelector('#profile-name');
+export const inputProfileInfo = document.querySelector('#profile-info');
+
+export const editProfileForm = document.querySelector('[name="edit-profile"]');
+export const adddCardForm = document.querySelector('[name="add-element"]');
+export const editAvatarForm = document.querySelector('[name="edit-avatar"]');
