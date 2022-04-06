@@ -8,7 +8,8 @@ import PopupWithForm from '../components/PopupWithForm.js';
 import UserInfo from '../components/UserInfo.js';
 import { 
   cardListSection, selectors, buttonEditProfile, validationConfig, 
-  buttonAddPlace, buttonEditAvatar, buttonTextSave, buttonTextCreate } from '../utils/constants.js';
+  buttonAddPlace, buttonEditAvatar, buttonTextSave, buttonTextCreate, inputProfileName, inputProfileInfo,
+  editProfileForm, adddCardForm, editAvatarForm } from '../utils/constants.js';
 
 // Создание экземпляра класса Api
 const api = new Api({
@@ -100,18 +101,18 @@ const popupEditAvatar = new PopupWithForm({
 popupEditAvatar.setEventListeners();
 
 //Валидация форм в модальном окне
-const formValidationProfilePopup = new FormValidator(validationConfig, document.querySelector('[name="edit-profile"]'));
+const formValidationProfilePopup = new FormValidator(validationConfig, editProfileForm);
 formValidationProfilePopup.enableValidation();
-const formValidationAddPlacePopup = new FormValidator(validationConfig, document.querySelector('[name="add-element"]'));
+const formValidationAddPlacePopup = new FormValidator(validationConfig, adddCardForm);
 formValidationAddPlacePopup.enableValidation();
-const formValidationEditAvatarPopup = new FormValidator(validationConfig, document.querySelector('[name="edit-avatar"]'));
+const formValidationEditAvatarPopup = new FormValidator(validationConfig, editAvatarForm);
 formValidationEditAvatarPopup.enableValidation();
 
 // Открытие модального окна редактирвоания профиля пользователя
 buttonEditProfile.addEventListener('click', () => {
   const userData = user.getUserInfo();
-  popupProfile.popup.querySelector('#profile-name').value = userData.name;
-  popupProfile.popup.querySelector('#profile-info').value = userData.info;
+  inputProfileName.value = userData.name;
+  inputProfileInfo.value = userData.info;
   formValidationProfilePopup.resetValidation();
   popupProfile.open()
 })
