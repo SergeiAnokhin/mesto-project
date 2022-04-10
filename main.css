@@ -3,6 +3,8 @@
 .body{background-color:#000;font-family:Inter,Arial,sans-serif}
 .page{box-sizing:border-box;color:#fff;margin:0 auto;max-width:1280px;min-width:320px;opacity:0;padding:45px 19px 55px;transition:visibility .1s,opacity .1s linear;visibility:hidden;width:100%}@media (max-width:527px){.page{padding:28px 0 31px}}
 .page_visible{opacity:1;visibility:visible}
+.loading{height:200px;left:50%;opacity:1;position:absolute;top:50%;transform:translate(-50%,-50%);transition:visibility .1s,opacity .1s linear;visibility:visible;width:200px}
+.loading_hidden{display:none;opacity:0;visibility:hidden}
 .header{border-bottom:1px solid rgba(84,84,84,.7);box-sizing:border-box;margin:0 auto;max-width:880px;padding:0 0 37px}@media (max-width:527px){.header{padding-bottom:27px}}
 @media (max-width:527px){.header__logo{height:25px;padding-left:27px;width:104px}}
 .main{margin:0 auto;max-width:880px;padding:40px 0 69px}@media (max-width:527px){.main{padding-left:19px;padding-right:19px}}@media (max-width:424px){.main{padding-bottom:50px;padding-top:42px}}
@@ -35,6 +37,7 @@
 .popup__image{margin-bottom:10px;max-height:75vh;max-width:75vw;-o-object-fit:contain;object-fit:contain;-o-object-position:center center;object-position:center center}
 .popup__place-name{font-size:12px;line-height:15px;margin:0;padding:0}
 .popup__close{background-color:transparent;background-image:url(973e77374abfb705de40.svg);background-position:50%;background-repeat:no-repeat;background-size:contain;border:none;cursor:pointer;height:32px;position:absolute;right:-40px;top:-40px;transition:opacity .2s linear;width:32px;z-index:2}.popup__close:hover{opacity:.6}@media (max-width:424px){.popup__close{height:20px;right:0;top:-36px;width:20px}}
+.popup__button{background-color:#000;border:none;box-sizing:border-box;color:#fff;cursor:pointer;font-size:18px;line-height:22px;margin-top:38px;padding:14px 0;text-align:center;transition:opacity .2s linear}.popup__button:hover{opacity:.8}.popup__button:disabled{background-color:#fff;border:1px solid #000;border-radius:2px;color:#000;cursor:default;opacity:.2}@media (max-width:527px){.popup__button{font-size:14px;line-height:27px;margin-top:44px;padding:9px 0}}
 .popup_opened{opacity:1;visibility:visible}
 .form{display:flex;flex-direction:column;padding-top:48px}@media (max-width:527px){.form{padding-top:75px}}
 .form__input{border:none;box-sizing:border-box;font-size:14px;line-height:17px;padding-bottom:9px}.form__input,.form__input:focus{border-bottom:1px solid rgba(0,0,0,.2)}.form__input:focus{outline:none}.form__input:focus:invalid{border-bottom:1px solid red;outline:none}.form__input:valid{border-bottom:1px solid rgba(0,0,0,.2)}.form__input:last-of-type{margin-bottom:0}
