@@ -9,6 +9,10 @@
 @import url(../blocks/page/page.css);
 @import url(../blocks/page/_visible/page_visible.css);
 
+/* Loading */
+@import url(../blocks/loading/loading.css);
+@import url(../blocks/loading/_hidden/loading_hidden.css);
+
 /* Header */
 @import url(../blocks/header/header.css);
 @import url(../blocks/header/__logo/header__logo.css);
@@ -54,6 +58,7 @@
 @import url(../blocks/popup/__image/popup__image.css);
 @import url(../blocks/popup/__place-name/popup__place-name.css);
 @import url(../blocks/popup/__close/popup__close.css);
+@import url(../blocks/popup/__button/popup__button.css);
 @import url(../blocks/popup/_opened/popup_opened.css);
 
 /* Form */

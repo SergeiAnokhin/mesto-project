@@ -21,3 +21,8 @@
 **Студент:** Сергей Анохин
 
 ![Логотип Яндекса](./src/images/yandex-logo.svg)
+
+
+Напарник по организации кода в парадигме ООП:
+evgenia.verhovtseva@yandex.ru 
+https://github.com/GeniaV
