@@ -10,7 +10,7 @@ import UserInfo from '../components/UserInfo.js';
 import { 
   cardListSection, selectors, buttonEditProfile, validationConfig, 
   buttonAddPlace, buttonEditAvatar, buttonTextSave, buttonTextCreate, inputProfileName, inputProfileInfo,
-  editProfileForm, adddCardForm, editAvatarForm, buttonTextDelete } from '../utils/constants.js';
+  editProfileForm, adddCardForm, editAvatarForm, buttonTextDelete, page, loading } from '../utils/constants.js';
 
 // Создание экземпляра класса Api
 const api = new Api({
@@ -37,6 +37,8 @@ Promise.all([api.getProfile(), api.getInitialCards()])
 .then(([userData, cards]) => {
   user.setUserInfo(userData)
   cardsList.renderItems(cards, userData);
+  page.classList.add('page_visible');
+  loading.classList.add('loading_hidden')
 })
 .catch(err => {
     console.log('Ошибка получения данных с сервера', err.message);

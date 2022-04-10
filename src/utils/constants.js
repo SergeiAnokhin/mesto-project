@@ -6,6 +6,9 @@ export const selectors = {
     avatar: '.profile__avatar-img'
 }
 
+export const page = document.querySelector('.page');
+export const loading = document.querySelector('.loading');
+
 export const buttonEditProfile = document.querySelector('.profile__edit-button');
 export const buttonAddPlace = document.querySelector('.profile__add-button');
 export const buttonEditAvatar = document.querySelector(selectors.avatar);
