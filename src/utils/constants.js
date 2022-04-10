@@ -29,6 +29,11 @@ export const buttonTextCreate = {
     doing : 'Создание...'
 }
 
+export const buttonTextDelete = {
+    do : 'Да',
+    doing : 'Удаление...'
+}
+
 export const inputProfileName = document.querySelector('#profile-name');
 export const inputProfileInfo = document.querySelector('#profile-info');
 

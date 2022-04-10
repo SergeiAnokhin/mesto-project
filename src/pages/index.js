@@ -5,11 +5,12 @@ import FormValidator from '../components/FormValidator.js';
 import Section from '../components/Section.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
+import PopupWithSubmit from '../components/PopupWithSubmit.js';
 import UserInfo from '../components/UserInfo.js';
 import { 
   cardListSection, selectors, buttonEditProfile, validationConfig, 
   buttonAddPlace, buttonEditAvatar, buttonTextSave, buttonTextCreate, inputProfileName, inputProfileInfo,
-  editProfileForm, adddCardForm, editAvatarForm } from '../utils/constants.js';
+  editProfileForm, adddCardForm, editAvatarForm, buttonTextDelete } from '../utils/constants.js';
 
 // Создание экземпляра класса Api
 const api = new Api({
@@ -82,6 +83,25 @@ const popupAddPlace = new PopupWithForm({
 });
 popupAddPlace.setEventListeners();
 
+// Создание модального окна подтверждения удаления карточки
+const popupDeleteElement = new PopupWithSubmit({
+  selector: '#popup_delete-element',
+  handleFormSubmit: (card) => {
+    popupDeleteElement.renderSave(buttonTextDelete, true);
+    api.deleteCard(card.getId())
+    .then(() => {
+      card.deleteElement();
+      popupDeleteElement.close();
+    })
+    .catch((err) => {
+      console.log('Ошибка удаления карточки', err.message);
+    })
+    .finally(() => popupDeleteElement.renderSave(buttonTextDelete, false));
+  }
+});
+popupDeleteElement.setEventListeners();
+
+
 // Создание модального окна редактирования аватара пользователя
 const popupEditAvatar = new PopupWithForm({
   selector: '#popup_edit-avatar',
@@ -129,17 +149,6 @@ buttonEditAvatar.addEventListener('click', () => {
   popupEditAvatar.open();
 })
 
-//Функция удаления карточки
-function removeCard(card) {
-  api.deleteCard(card.getId())
-  .then(() => {
-    card.deleteElement();
-  })
-  .catch((err) => {
-    console.log('Ошибка удаления карточки', err.message);
-  });
-}
-
 // Функция создание карточки
 function createCard(cardItem, userData) {
   const card = new Card({
@@ -152,7 +161,7 @@ function createCard(cardItem, userData) {
     },
 
     handleDeleteIconClick: (card) => {
-      removeCard(card);
+      popupDeleteElement.open(card);
     },
 
     handleLikeClick: (card) => {
