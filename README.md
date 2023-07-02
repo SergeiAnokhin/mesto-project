@@ -1,28 +1,38 @@
-# Проект: Место
+# Mesto
 
-**Описание проекта:**
+## [Project Link](https://sergeianokhin.github.io/mesto-project/)
 
-Третья практическая работа на онлайн-курсе "Веб-разработчик плюс" от Яндекс.Практикума. Работа представляет собой одностраничный лендинг о красивых местах России. 
+## Tech Stack
 
-**В проекте использованы:**
+HTML, CSS, BEM, JavaScript
 
-- Семантическая разметка;
-- Методология БЭМ;
-- Адаптивная верстка под мобильные устройства;
-- Модели построения сеток Flex и Grid.
-- JavaScript (Модальные окна, добавление и удаление карточек мест, лайки).
-- Модули JavaScript.
-- Сборка проекта Webpack
+## Main goal
 
-[Ссылка на GitHub Pages](https://sergeianokhin.github.io/mesto-project/)
+Practice writing server requests, applying object-oriented programming principles in practice.
 
----
+## Description
 
-**Студент:** Сергей Анохин
+The project is a single-page landing, adapted for various devices, where each user can add cards of their favorite places, write titles for them, like and dislike their own and other users' cards, open cards in a popup, and delete their own cards. Users can also edit their personal information.
 
-![Логотип Яндекса](./src/images/yandex-logo.svg)
+**The project incorporates:**
 
+ - Semantic markup
+ - BEM methodology
+ - Responsive design for mobile devices
+ - Flex and Grid for grid layouts
+ - JavaScript for popups, adding and deleting location, and likes
+ - JavaScript modules
+ - Webpack for project bundling
 
-Напарник по организации кода в парадигме ООП:
-evgenia.verhovtseva@yandex.ru 
-https://github.com/GeniaV
+## Setup
+
+You should have Node.js installed. Then, enter the following commands in the specified order:
+```sh
+npm i
+```
+```sh
+npm run dev
+```
+
+**Code organization partner in the OOP paradigm:**
+[GeniaV](https://github.com/GeniaV)
