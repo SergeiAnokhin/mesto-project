@@ -1,7 +1,7 @@
 {
   "name": "mesto-project",
   "version": "1.0.0",
-  "description": "**Описание проекта:**",
+  "description": "Mesto is a project where users can add cards of their favorite places",
   "main": "index.js",
   "scripts": {
     "build": "webpack --mode production",

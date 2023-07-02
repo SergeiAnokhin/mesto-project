@@ -23,18 +23,18 @@ export const validationConfig = {
 }
 
 export const buttonTextSave = {
-    do : 'Сохранить',
-    doing : 'Сохранение...'
+    do : 'Save',
+    doing : 'Saving...'
   }
   
 export const buttonTextCreate = {
-    do : 'Cоздать',
-    doing : 'Создание...'
+    do : 'Create',
+    doing : 'Creating...'
 }
 
 export const buttonTextDelete = {
-    do : 'Да',
-    doing : 'Удаление...'
+    do : 'Yes',
+    doing : 'Deleting...'
 }
 
 export const inputProfileName = document.querySelector('#profile-name');
